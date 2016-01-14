@@ -85,9 +85,7 @@ void Simulador::render(int scenario)
 	// SHADER -----------------------------------------------------------------
 	m_shaderProgram->use();
 
-	//
-	//
-	//
+	m_scenario->renderScenario();
 
 	// END SHADER -------------------------------------------------------------
 	m_shaderProgram->unuse();

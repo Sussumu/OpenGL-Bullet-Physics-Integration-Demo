@@ -18,7 +18,7 @@ public:
 	void render(int scenario);
 	void eventHandler();
 	void endProgram();
-	Scenario* m_scenario;
+	
 private:
 
 	enum SimulationState
@@ -31,7 +31,7 @@ private:
 	InputComponent* m_input { new InputComponent() };
 	ShaderProgram* m_shaderProgram { new ShaderProgram() };
 
-	
+	Scenario* m_scenario;
 
 	void initShaders();
 };
