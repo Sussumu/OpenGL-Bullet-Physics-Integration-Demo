@@ -1,10 +1,13 @@
 #include "Simulador.h"
 #include "ErrorHandle.h"
+#include "GravityScenario.h"
 
 #include <GL/glew.h>
 
-Simulador::Simulador()
+Simulador::Simulador(int option)
 {
+	initializeSystems();
+	setupScenario(option);
 }
 
 
@@ -34,8 +37,19 @@ void Simulador::initShaders()
 	m_shaderProgram->linkShaders();
 }
 
+void Simulador::setupScenario(int option)
+{
+	switch (option)
+	{
+	case 1:
+		m_scenario = new GravityScenario();
+		m_scenario->setupScenario();
+		break;
+	}
+}
+
 // Loop principal do simulador
-bool Simulador::gameLoop()
+bool Simulador::gameLoop(int scenario)
 {
 	float actualTicks = 0, passedTicks = 0;
 	float maxFps = 60.0f;
@@ -46,7 +60,7 @@ bool Simulador::gameLoop()
 
 		///////////////////////////////////////////////////
 		eventHandler();
-		render();
+		render(scenario);
 		///////////////////////////////////////////////////
 
 		if (m_window->wantToCalculateFps)
@@ -63,13 +77,17 @@ bool Simulador::gameLoop()
 }
 
 // Trata as chamadas de OpenGL
-void Simulador::render()
+void Simulador::render(int scenario)
 {
 	glClearDepth(1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	// SHADER -----------------------------------------------------------------
 	m_shaderProgram->use();
+
+	//
+	//
+	//
 
 	// END SHADER -------------------------------------------------------------
 	m_shaderProgram->unuse();

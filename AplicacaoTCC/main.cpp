@@ -1,17 +1,27 @@
 #include "Simulador.h"
-#include <Windows.h>
+#include <iostream>
 
 int main(int argc, char* argv[])
 {
-	Simulador* simulador{ new Simulador() };
+	Simulador* simulador;
 	
-	simulador->initializeSystems();
+	// Menu
+	int option = 0;
+	do
+	{
+		std::cout << "Escolha o demo que deseja carregar:" << std::endl
+				  << "(ou 0 para sair)" << std::endl;
+		std::cin >> option;
 
-	simulador->gameLoop();
+		if (option > 0)
+		{
+			simulador = new Simulador(option);
+			simulador->gameLoop(option);
 
-	Sleep(1000);
+			delete simulador;
+		}
 
-	delete simulador;
-
+	} while (option != 0);
+		
 	return 0;
 }
