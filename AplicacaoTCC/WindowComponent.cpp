@@ -42,7 +42,7 @@ bool WindowComponent::initializeWindow()
 	}
 
 	// Glew
-	glewExperimental = true;
+	glewExperimental = GL_TRUE;
 	GLenum glewInitialization = glewInit();
 	if (glewInitialization != GLEW_OK)
 	{
