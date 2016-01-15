@@ -36,10 +36,10 @@
     <ClInclude Include="WindowComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Scenario.h">
+    <ClInclude Include="Scenario2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GravityScenario.h">
+    <ClInclude Include="GravityScenario2.h">
       <Filter>Scenarios</Filter>
     </ClInclude>
   </ItemGroup>
@@ -65,11 +65,11 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Scenario.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GravityScenario.cpp">
+    <ClCompile Include="GravityScenario2.cpp">
       <Filter>Scenarios</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenario2.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
