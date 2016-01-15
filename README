@@ -1,0 +1,7 @@
+Projeto de TCC para o curso de Tecnologia da Informação e Comunicação na Faeterj (Faculdade de Educação Tecnológica do Estado do Rio de Janeiro) - Petrópolis.
+
+O projeto consiste em uma série de demos mostrando a integração entre a parte gráfica e física em um sistema, utilizando:
+- Linguagem C++
+- Biblioteca SDL 2
+- Modern OpenGL
+- Bullet Physics
