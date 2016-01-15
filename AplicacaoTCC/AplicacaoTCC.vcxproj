@@ -88,11 +88,11 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\sussumu\Source\Repos\tcc\AplicacaoTCC\Include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\gabriel.kato\Documents\AplicacaoTCC\AplicacaoTCC\Include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\sussumu\Source\Repos\tcc\AplicacaoTCC\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\gabriel.kato\Documents\AplicacaoTCC\AplicacaoTCC\Lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>opengl32.lib;glew32.lib;SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
@@ -124,7 +124,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>C:\Users\gabriel.kato\Documents\AplicacaoTCC\AplicacaoTCC\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\gabriel.kato\Documents\AplicacaoTCC\AplicacaoTCC\Lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>opengl32.lib;glew32.lib;SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
@@ -132,9 +132,9 @@
   <ItemGroup>
     <ClInclude Include="ErrorHandle.h" />
     <ClInclude Include="GameObject.h" />
-    <ClInclude Include="GravityScenario2.h" />
+    <ClInclude Include="GravityScenario.h" />
     <ClInclude Include="InputComponent.h" />
-    <ClInclude Include="Scenario2.h" />
+    <ClInclude Include="Scenario.h" />
     <ClInclude Include="ShaderProgram.h" />
     <ClInclude Include="Simulador.h" />
     <ClInclude Include="WindowComponent.h" />
@@ -142,10 +142,10 @@
   <ItemGroup>
     <ClCompile Include="ErrorHandle.cpp" />
     <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="GravityScenario2.cpp" />
+    <ClCompile Include="GravityScenario.cpp" />
     <ClCompile Include="InputComponent.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Scenario2.cpp" />
+    <ClCompile Include="Scenario.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
     <ClCompile Include="Simulador.cpp" />
     <ClCompile Include="WindowComponent.cpp" />
