@@ -10,6 +10,7 @@ int main(int argc, char* argv[])
 	do
 	{
 		std::cout << "Escolha o demo que deseja carregar:" << std::endl
+				  << "1 - Gravidade" << std::endl
 				  << "(ou 0 para sair)" << std::endl;
 		std::cin >> option;
 

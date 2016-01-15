@@ -8,10 +8,18 @@ Scenario::~Scenario()
 {
 }
 
-void Scenario::setupScenario()
+void Scenario::renderScenario(ShaderProgram shaderProgram)
 {
+	for each (GameObject* gameObject in objectsList)
+	{
+		gameObject->update(shaderProgram);
+	}
 }
 
-void Scenario::renderScenario()
+void Scenario::cleanScenario()
 {
+	for each (GameObject* gameObject in objectsList)
+	{
+		gameObject->clean();
+	}
 }

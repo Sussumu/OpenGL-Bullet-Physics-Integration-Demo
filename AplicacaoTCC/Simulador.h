@@ -4,6 +4,7 @@
 #include "InputComponent.h"
 #include "ShaderProgram.h"
 #include "Scenario.h"
+#include "Camera.h"
 
 class Simulador
 {
@@ -32,6 +33,7 @@ private:
 	ShaderProgram* m_shaderProgram { new ShaderProgram() };
 
 	Scenario* m_scenario;
+	Camera m_camera;
 
 	void initShaders();
 };

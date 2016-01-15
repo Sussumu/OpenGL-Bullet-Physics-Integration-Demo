@@ -32,7 +32,7 @@ void ShaderProgram::compileShaders(const std::string &vertexShaderFilePath, cons
 
 void ShaderProgram::compileShader(const std::string filePath, GLuint id)
 {
-	m_programID = glCreateProgram();
+	programID = glCreateProgram();
 
 	// ABERTURA
 	std::ifstream shaderFile(filePath);
@@ -75,22 +75,22 @@ void ShaderProgram::compileShader(const std::string filePath, GLuint id)
 
 void ShaderProgram::linkShaders()
 {
-	glAttachShader(m_programID, m_vertexShaderID);
-	glAttachShader(m_programID, m_fragmentShaderID);
+	glAttachShader(programID, m_vertexShaderID);
+	glAttachShader(programID, m_fragmentShaderID);
 
-	glLinkProgram(m_programID);
+	glLinkProgram(programID);
 
 	GLint success = 0;
-	glGetProgramiv(m_programID, GL_LINK_STATUS, (int*)&success);
+	glGetProgramiv(programID, GL_LINK_STATUS, (int*)&success);
 	if (success == GL_FALSE)
 	{
 		GLint maxLength = 0;
-		glGetProgramiv(m_programID, GL_INFO_LOG_LENGTH, &maxLength);
+		glGetProgramiv(programID, GL_INFO_LOG_LENGTH, &maxLength);
 
 		std::vector<GLchar> errorLog(maxLength);
-		glGetProgramInfoLog(m_programID, maxLength, &maxLength, &errorLog[0]);
+		glGetProgramInfoLog(programID, maxLength, &maxLength, &errorLog[0]);
 
-		glDeleteProgram(m_programID);
+		glDeleteProgram(programID);
 		glDeleteShader(m_vertexShaderID);
 		glDeleteShader(m_fragmentShaderID);
 
@@ -98,21 +98,21 @@ void ShaderProgram::linkShaders()
 		fatalError("Shaders não puderam ser linkados ao programa");
 	}
 
-	glDetachShader(m_programID, m_vertexShaderID);
-	glDetachShader(m_programID, m_fragmentShaderID);
+	glDetachShader(programID, m_vertexShaderID);
+	glDetachShader(programID, m_fragmentShaderID);
 	glDeleteShader(m_vertexShaderID);
 	glDeleteShader(m_fragmentShaderID);
 }
 
 void ShaderProgram::addAttribute(const std::string attributeName)
 {
-	glBindAttribLocation(m_programID, m_numAttributes, attributeName.c_str());
+	glBindAttribLocation(programID, m_numAttributes, attributeName.c_str());
 	m_numAttributes++;
 }
 
 void ShaderProgram::use()
 {
-	glUseProgram(m_programID);
+	glUseProgram(programID);
 	for (int i = 0; i < m_numAttributes; i++)
 	{
 		glEnableVertexAttribArray(i);

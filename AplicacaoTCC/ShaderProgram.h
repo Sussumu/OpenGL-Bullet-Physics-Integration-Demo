@@ -10,6 +10,8 @@ public:
 	ShaderProgram();
 	~ShaderProgram();
 
+	GLuint programID;
+
 	void compileShaders(const std::string &vertexShaderFilePath, const std::string &fragmentShaderFilePath);
 	void linkShaders();
 	void addAttribute(const std::string attributeName);
@@ -20,7 +22,6 @@ public:
 private:
 
 	int m_numAttributes{ 0 };
-	GLuint m_programID;
 	GLuint m_vertexShaderID;
 	GLuint m_fragmentShaderID;
 
