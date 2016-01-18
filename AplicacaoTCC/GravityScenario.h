@@ -3,6 +3,7 @@
 #include "Scenario.h"
 #include "GameObject.h"
 #include "Cube.h"
+#include "DiffuseIluminationSource.h"
 #include "ShaderProgram.h"
 #include <vector>
 
@@ -13,11 +14,10 @@ public:
 	~GravityScenario();
 
 	void setupScenario();
-	//void renderScenario(ShaderProgram shaderProgram);
-	//void cleanScenario();
 
 private:
 	GameObject* cube;
+	DiffuseIluminationSource* diffuseSource;
 
 	std::vector<GameObject*> objectsList;
 };

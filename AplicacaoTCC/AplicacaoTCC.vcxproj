@@ -132,6 +132,7 @@
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Cube.h" />
+    <ClInclude Include="DiffuseIluminationSource.h" />
     <ClInclude Include="ErrorHandle.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GravityScenario.h" />
@@ -143,6 +144,7 @@
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Cube.cpp" />
+    <ClCompile Include="DiffuseIluminationSource.cpp" />
     <ClCompile Include="ErrorHandle.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GravityScenario.cpp" />
@@ -154,6 +156,10 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Textures\container.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\x64\Debug\Shaders\colorShading.frag" />
+    <None Include="..\x64\Debug\Shaders\colorShading.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
