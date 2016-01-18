@@ -1,7 +1,6 @@
 #pragma once
 
 #include "WindowComponent.h"
-#include "InputComponent.h"
 #include "ShaderProgram.h"
 #include "Scenario.h"
 #include "Camera.h"
@@ -13,12 +12,9 @@ public:
 	Simulador(int option);
 	~Simulador();
 
-	bool initializeSystems();
+	bool initializeSystems(); 
 	void setupScenario(int option);
 	bool gameLoop(int scenario);
-	void render(int scenario);
-	void eventHandler();
-	void endProgram();
 	
 private:
 
@@ -28,13 +24,28 @@ private:
 		EXIT
 	} m_simulationState;
 
+	// DeltaTime
+	float m_actualTicks = 0, m_deltaTime = 0;
+	float m_maxFps { 60.0f };
+
+	// Input
+	GLfloat m_lastMouseX = SCREEN_WIDTH/2, m_lastMouseY = SCREEN_HEIGHT/2;
+	bool m_firstMouse = true;
+
+	// Componentes
 	WindowComponent* m_window { new WindowComponent() };
-	InputComponent* m_input { new InputComponent() };
 	ShaderProgram* m_shaderProgram { new ShaderProgram() };
 
 	Scenario* m_scenario;
-	Camera m_camera;
+	Camera* m_camera;
 
+	void render(int scenario);
+	void eventHandler();
+	void keyboardHandler(SDL_Keycode key);
+	void mouseHandler(double currentMouseX, double currentMouseY);
+	void mouseScrollHandler(double offset);
+	void endProgram();
 	void initShaders();
+	void updateCamera();
 };
 

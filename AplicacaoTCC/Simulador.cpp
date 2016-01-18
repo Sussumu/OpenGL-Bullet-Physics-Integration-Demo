@@ -25,6 +25,9 @@ bool Simulador::initializeSystems()
 	// Shaders
 	initShaders();
 
+	// Câmera
+	m_camera = new Camera(glm::vec3(0.0f, 0.0f, 3.0f));
+
 	return true;
 }
 
@@ -50,26 +53,24 @@ void Simulador::setupScenario(int option)
 // Loop principal do simulador
 bool Simulador::gameLoop(int scenario)
 {
-	float actualTicks = 0, passedTicks = 0;
-	float maxFps = 60.0f;
-
 	while (m_simulationState != SimulationState::EXIT)
 	{
-		actualTicks = SDL_GetTicks();
+		m_actualTicks = SDL_GetTicks();
 
 		///////////////////////////////////////////////////
 		eventHandler();
+		updateCamera();
 		render(scenario);
 		///////////////////////////////////////////////////
 
 		if (m_window->wantToCalculateFps)
 			m_window->calculateFPS();
 
-		passedTicks = SDL_GetTicks() - actualTicks;
+		m_deltaTime = SDL_GetTicks() - m_actualTicks;
 
 		// Frame limiter
-		if (1000.0f / maxFps > passedTicks)
-			SDL_Delay(1000.0f / maxFps - passedTicks);
+		if (1000.0f / m_maxFps > m_deltaTime)
+			SDL_Delay(1000.0f / m_maxFps - m_deltaTime);
 	}
 
 	return true;
@@ -106,10 +107,76 @@ void Simulador::eventHandler()
 			m_simulationState = SimulationState::EXIT;
 			break;
 		case SDL_KEYDOWN:
-			m_input->keyboardHandler(sdlevent.key.keysym.sym);
+			keyboardHandler(sdlevent.key.keysym.sym);
 			break;
+		case SDL_MOUSEMOTION:
+			mouseHandler(sdlevent.motion.x, sdlevent.motion.y);
+			break;
+		case SDL_MOUSEWHEEL:
+			mouseScrollHandler(sdlevent.wheel.y);
 		}
 	}
+}
+
+// Trata o input do teclado
+void Simulador::keyboardHandler(SDL_Keycode key)
+{
+	switch (key)
+	{
+	case SDLK_w:
+		m_camera->ProcessKeyboard(FORWARD, m_deltaTime);
+		break;
+	case SDLK_a:
+		m_camera->ProcessKeyboard(LEFT, m_deltaTime);
+		break;
+	case SDLK_s:
+		m_camera->ProcessKeyboard(BACKWARD, m_deltaTime);
+		break;
+	case SDLK_d:
+		m_camera->ProcessKeyboard(RIGHT, m_deltaTime);
+		break;
+	}
+}
+
+// Trata eventos do mouse (recebe a posição atual x,y e calcula as variações)
+void Simulador::mouseHandler(double currentMouseX, double currentMouseY)
+{
+	if (m_firstMouse)
+	{
+		m_lastMouseX = currentMouseX;
+		m_lastMouseY = currentMouseY;
+		m_firstMouse = false;
+	}
+
+	GLfloat xoffset = currentMouseX - m_lastMouseX;
+	GLfloat yoffset = m_lastMouseY - currentMouseY;
+
+	m_lastMouseX = currentMouseX;
+	m_lastMouseY = currentMouseY;
+
+	m_camera->ProcessMouseMovement(xoffset, yoffset);
+}
+
+// Trata eventos do scroll do mouse
+void Simulador::mouseScrollHandler(double offset)
+{
+	m_camera->ProcessMouseScroll(offset);
+}
+
+// Atualiza a posição da câmera
+void Simulador::updateCamera()
+{
+	glm::mat4 view;
+	view = m_camera->GetViewMatrix();
+	glm::mat4 projection;
+	projection = glm::perspective(m_camera->Zoom, (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.1f, 1000.0f);
+
+	GLint modelLoc = glGetUniformLocation(m_shaderProgram->programID, "model");
+	GLint viewLoc = glGetUniformLocation(m_shaderProgram->programID, "view");
+	GLint projLoc = glGetUniformLocation(m_shaderProgram->programID, "projection");
+
+	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+	glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
 }
 
 // Finaliza o programa em segurança
@@ -117,7 +184,6 @@ void Simulador::endProgram()
 {
 	SDL_DestroyWindow(m_window->getWindow());
 
-	delete m_input;
 	delete m_shaderProgram;
 	delete m_window;
 

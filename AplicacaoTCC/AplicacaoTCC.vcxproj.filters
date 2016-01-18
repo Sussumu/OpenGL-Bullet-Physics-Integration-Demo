@@ -37,9 +37,6 @@
     <ClInclude Include="ErrorHandle.h">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="InputComponent.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
     <ClInclude Include="ShaderProgram.h">
       <Filter>Shaders</Filter>
     </ClInclude>
@@ -55,6 +52,9 @@
     <ClInclude Include="Camera.h">
       <Filter>Utils</Filter>
     </ClInclude>
+    <ClInclude Include="DiffuseIluminationSource.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GravityScenario.cpp">
@@ -67,9 +67,6 @@
       <Filter>GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="ErrorHandle.cpp">
-      <Filter>Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="InputComponent.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
     <ClCompile Include="ShaderProgram.cpp">
@@ -90,10 +87,21 @@
     <ClCompile Include="Camera.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
+    <ClCompile Include="DiffuseIluminationSource.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Textures\container.jpg">
       <Filter>Textures</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\x64\Debug\Shaders\colorShading.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\x64\Debug\Shaders\colorShading.vert">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>
