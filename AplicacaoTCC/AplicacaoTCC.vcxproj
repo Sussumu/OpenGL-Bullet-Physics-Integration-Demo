@@ -135,7 +135,6 @@
     <ClInclude Include="ErrorHandle.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GravityScenario.h" />
-    <ClInclude Include="InputComponent.h" />
     <ClInclude Include="Scenario.h" />
     <ClInclude Include="ShaderProgram.h" />
     <ClInclude Include="Simulador.h" />
@@ -147,7 +146,6 @@
     <ClCompile Include="ErrorHandle.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GravityScenario.cpp" />
-    <ClCompile Include="InputComponent.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Scenario.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />

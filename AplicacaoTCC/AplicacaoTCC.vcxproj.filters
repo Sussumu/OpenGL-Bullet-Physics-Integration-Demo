@@ -37,9 +37,6 @@
     <ClInclude Include="ErrorHandle.h">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="InputComponent.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
     <ClInclude Include="ShaderProgram.h">
       <Filter>Shaders</Filter>
     </ClInclude>
@@ -67,9 +64,6 @@
       <Filter>GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="ErrorHandle.cpp">
-      <Filter>Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="InputComponent.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
     <ClCompile Include="ShaderProgram.cpp">

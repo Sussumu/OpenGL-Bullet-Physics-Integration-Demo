@@ -25,9 +25,6 @@ bool WindowComponent::initializeWindow()
 		fatalError("O SDL não pode ser inicializado!");
 	}
 
-	// Double Buffer no OpenGL
-	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-
 	m_window = SDL_CreateWindow("Aplicação TCC", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_OPENGL);
 	if (m_window == nullptr)
 	{
@@ -48,6 +45,11 @@ bool WindowComponent::initializeWindow()
 	{
 		fatalError("Glew não pode ser inicializado.");
 	}
+
+	// Setup OpenGL
+	glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+	glEnable(GL_DEPTH_TEST);
 
 	// Vsync
 	if (m_vsync)

@@ -88,18 +88,18 @@ void Cube::update(ShaderProgram shaderProgram)
 
 #pragma region Rendering
 	// Create transformations
-	glm::mat4 view;
-	glm::mat4 projection;
-	view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
-	projection = glm::perspective(45.0f, (GLfloat)800 / (GLfloat)600, 0.1f, 100.0f);
-	// Get their uniform location
+	//glm::mat4 view;
+	//glm::mat4 projection;
+	//view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+	//projection = glm::perspective(45.0f, (GLfloat)800 / (GLfloat)600, 0.1f, 100.0f);
+	//// Get their uniform location
 	GLint modelLoc = glGetUniformLocation(shaderProgram.programID, "model");
-	GLint viewLoc = glGetUniformLocation(shaderProgram.programID, "view");
-	GLint projLoc = glGetUniformLocation(shaderProgram.programID, "projection");
-	// Pass the matrices to the shader
-	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
-	// Note: currently we set the projection matrix each frame, but since the projection matrix rarely changes it's often best practice to set it outside the main loop only once.
-	glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
+	//GLint viewLoc = glGetUniformLocation(shaderProgram.programID, "view");
+	//GLint projLoc = glGetUniformLocation(shaderProgram.programID, "projection");
+	//// Pass the matrices to the shader
+	//glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+	//// Note: currently we set the projection matrix each frame, but since the projection matrix rarely changes it's often best practice to set it outside the main loop only once.
+	//glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
 
 	glBindVertexArray(m_VAO);
 	for (GLuint i = 0; i < 10; i++)
