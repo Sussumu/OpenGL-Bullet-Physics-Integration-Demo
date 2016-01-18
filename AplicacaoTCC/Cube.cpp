@@ -4,6 +4,8 @@
 
 Cube::Cube(GLfloat* vertices, glm::vec3* position)
 {
+	m_vertices = (GLfloat*)malloc(sizeof(vertices));
+	m_position = (glm::vec3*)malloc(sizeof(position));
 	memcpy(m_vertices, vertices, sizeof(vertices));
 	memcpy(m_position, position, sizeof(position));
 }
@@ -54,23 +56,23 @@ void Cube::setup()
 	glGenerateMipmap(GL_TEXTURE_2D);
 	SOIL_free_image_data(image);
 	glBindTexture(GL_TEXTURE_2D, 0); // Unbind texture when done, so we won't accidentily mess up our texture.
-									 // ===================
-									 // Texture 2
-									 // ===================
-									 //glGenTextures(1, &texture2);
-									 //glBindTexture(GL_TEXTURE_2D, texture2);
-									 //// Set our texture parameters
-									 //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-									 //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-									 //// Set texture filtering
-									 //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-									 //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-									 //// Load, create texture and generate mipmaps
-									 //image = SOIL_load_image("Textures/awesomeface.png", &width, &height, 0, SOIL_LOAD_RGB);
-									 //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
-									 //glGenerateMipmap(GL_TEXTURE_2D);
-									 //SOIL_free_image_data(image);
-									 //glBindTexture(GL_TEXTURE_2D, 0);
+	// ===================
+	// Texture 2
+	// ===================
+	glGenTextures(1, &m_texture2);
+	glBindTexture(GL_TEXTURE_2D, m_texture2);
+	// Set our texture parameters
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	// Set texture filtering
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	// Load, create texture and generate mipmaps
+	image = SOIL_load_image("Textures/awesomeface.png", &width, &height, 0, SOIL_LOAD_RGB);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+	glGenerateMipmap(GL_TEXTURE_2D);
+	SOIL_free_image_data(image);
+	glBindTexture(GL_TEXTURE_2D, 0);
 #pragma endregion
 }
 
@@ -81,9 +83,9 @@ void Cube::update(ShaderProgram shaderProgram)
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, m_texture1);
 	glUniform1i(glGetUniformLocation(shaderProgram.programID, "ourTexture1"), 0);
-	//glActiveTexture(GL_TEXTURE1);
-	//glBindTexture(GL_TEXTURE_2D, m_texture2);
-	//glUniform1i(glGetUniformLocation(shaderProgram.Program, "ourTexture2"), 1);
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, m_texture2);
+	glUniform1i(glGetUniformLocation(shaderProgram.programID, "ourTexture2"), 1);
 #pragma endregion
 
 #pragma region Rendering
@@ -91,7 +93,7 @@ void Cube::update(ShaderProgram shaderProgram)
 	glm::mat4 view;
 	glm::mat4 projection;
 	view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
-	projection = glm::perspective(45.0f, (GLfloat)800 / (GLfloat)600, 0.1f, 100.0f);
+	projection = glm::perspective(45.0f, (GLfloat)800 / (GLfloat)600, 0.1f, 1000.0f);
 	// Get their uniform location
 	GLint modelLoc = glGetUniformLocation(shaderProgram.programID, "model");
 	GLint viewLoc = glGetUniformLocation(shaderProgram.programID, "view");

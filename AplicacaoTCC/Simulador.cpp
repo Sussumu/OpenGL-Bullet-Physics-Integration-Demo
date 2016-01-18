@@ -43,7 +43,6 @@ void Simulador::setupScenario(int option)
 	{
 	case 1:
 		m_scenario = new GravityScenario();
-		m_scenario->setupScenario();
 		break;
 	}
 }
@@ -81,6 +80,7 @@ void Simulador::render(int scenario)
 {
 	glClearDepth(1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClearColor(0.5, 0.5, 0.5, 1.0);
 
 	// SHADER -----------------------------------------------------------------
 	m_shaderProgram->use();

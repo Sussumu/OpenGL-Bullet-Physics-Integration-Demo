@@ -88,11 +88,11 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\gabriel.kato\Documents\AplicacaoTCC\AplicacaoTCC\Include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\sussumu\Source\Repos\tcc\AplicacaoTCC\Include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\gabriel.kato\Documents\AplicacaoTCC\AplicacaoTCC\Lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\sussumu\Source\Repos\tcc\AplicacaoTCC\Lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>opengl32.lib;glew32.lib;SDL2.lib;SDL2main.lib;SOIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
