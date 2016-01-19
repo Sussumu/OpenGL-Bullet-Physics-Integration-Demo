@@ -4,6 +4,7 @@
 #include "ShaderProgram.h"
 #include "Scenario.h"
 #include "Camera.h"
+#include <vector>
 
 class Simulador
 {
@@ -34,10 +35,12 @@ private:
 
 	// Componentes
 	WindowComponent* m_window { new WindowComponent() };
-	ShaderProgram* m_shaderProgram { new ShaderProgram() };
+	ShaderProgram* m_shaderProgram{ new ShaderProgram() };
+	ShaderProgram* m_lightShaderProgram{ new ShaderProgram() };
 
 	Scenario* m_scenario;
 	Camera* m_camera;
+	std::vector<ShaderProgram*> m_shaderPrograms;
 
 	void render(int scenario);
 	void eventHandler();

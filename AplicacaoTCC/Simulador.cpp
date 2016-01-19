@@ -10,13 +10,12 @@ Simulador::Simulador(int option)
 	setupScenario(option);
 }
 
-
 Simulador::~Simulador()
 {
 	endProgram();
 }
 
-// Inicializa o sistema
+// Inicializa janela, shaders e câmera
 bool Simulador::initializeSystems()
 {
 	// Window + SDL init
@@ -38,15 +37,23 @@ void Simulador::initShaders()
 	m_shaderProgram->addAttribute("vertexPosition");
 	m_shaderProgram->addAttribute("vertexColor");
 	m_shaderProgram->linkShaders();
+	
+	m_lightShaderProgram->compileShaders("Shaders/lightShading.vert", "Shaders/lightShading.frag");
+	//m_lightShaderProgram->addAttribute("vertexPosition");
+	//m_lightShaderProgram->addAttribute("vertexColor");
+	m_lightShaderProgram->linkShaders();
+
+	m_shaderPrograms.push_back(m_shaderProgram);		// 0
+	m_shaderPrograms.push_back(m_lightShaderProgram);	// 1
 }
 
+// Seleciona e carrega o scenario, chamado pelo construtor
 void Simulador::setupScenario(int option)
 {
 	switch (option)
 	{
 	case 1:
-		m_scenario = new GravityScenario();
-		m_scenario->setupScenario();
+		m_scenario = new GravityScenario(m_shaderPrograms);
 		break;
 	}
 }
@@ -84,12 +91,20 @@ void Simulador::render(int scenario)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	// SHADER -----------------------------------------------------------------
-	m_shaderProgram->use();
+	//m_shaderProgram->use();
+	//m_lightShaderProgram->use();
+	for each (auto shader in m_shaderPrograms)
+	{
+		shader->use();
+	}
 
-	m_scenario->renderScenario(*m_shaderProgram);
+	m_scenario->renderScenario();
 
 	// END SHADER -------------------------------------------------------------
-	m_shaderProgram->unuse();
+	for each (auto shader in m_shaderPrograms)
+	{
+		shader->unuse();
+	}
 
 	SDL_GL_SwapWindow(m_window->getWindow());
 }

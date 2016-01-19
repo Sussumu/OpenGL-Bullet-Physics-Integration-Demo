@@ -8,11 +8,16 @@ Scenario::~Scenario()
 {
 }
 
-void Scenario::renderScenario(ShaderProgram shaderProgram)
+void Scenario::setupScenario(ShaderProgram* shaderPrograms)
+{
+	// Será sobrescrito pelas classes derivadas
+}
+
+void Scenario::renderScenario()
 {
 	for each (GameObject* gameObject in objectsList)
 	{
-		gameObject->update(shaderProgram);
+		gameObject->update();
 	}
 }
 

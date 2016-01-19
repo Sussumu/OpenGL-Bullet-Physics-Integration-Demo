@@ -10,10 +10,10 @@
 class GravityScenario : public Scenario
 {
 public:
-	GravityScenario();
+	GravityScenario(std::vector<ShaderProgram*> shaderPrograms);
 	~GravityScenario();
 
-	void setupScenario();
+	void setupScenario(std::vector<ShaderProgram*> shaderPrograms);
 
 private:
 	GameObject* cube;

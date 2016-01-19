@@ -3,16 +3,16 @@
 
 #include "GravityScenario.h"
 
-GravityScenario::GravityScenario()
+GravityScenario::GravityScenario(std::vector<ShaderProgram*> shaderPrograms)
 {
-	setupScenario();
+	setupScenario(shaderPrograms);
 }
 
 GravityScenario::~GravityScenario()
 {
 }
 
-void GravityScenario::setupScenario()
+void GravityScenario::setupScenario(std::vector<ShaderProgram*> shaderPrograms)
 {
 	// Cubo
 	GLfloat vertices[] ={
@@ -70,12 +70,11 @@ void GravityScenario::setupScenario()
 		glm::vec3( 1.5f,  0.2f,  -1.5f),
 		glm::vec3(-1.3f,  1.0f,  -1.5f)
 	};
-	cube = new Cube(vertices, position);
+	cube = new Cube(shaderPrograms, vertices, position);
 	objectsList.push_back(cube);
 	
 	// Iluminação
-	glm::vec3 lightPosition = { 1.2f, 1.0f, 2.0f };
-	diffuseSource = new DiffuseIluminationSource(&lightPosition);
+	diffuseSource = new DiffuseIluminationSource(shaderPrograms, vertices, position);
 	objectsList.push_back(diffuseSource);
 
 	for each (GameObject* gameObject in objectsList)

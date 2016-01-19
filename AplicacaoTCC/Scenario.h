@@ -10,11 +10,12 @@ public:
 	Scenario();
 	~Scenario();
 
-	virtual void setupScenario() = 0;
-	virtual void renderScenario(ShaderProgram shaderProgram);
+	virtual void setupScenario(ShaderProgram* shaderPrograms);
+	virtual void renderScenario();
 	virtual void cleanScenario();
 
 private:
 	std::vector<GameObject*> objectsList;
+	ShaderProgram* m_shaderPrograms;
 };
 
