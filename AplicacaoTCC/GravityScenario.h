@@ -2,23 +2,35 @@
 
 #include "Scenario.h"
 #include "GameObject.h"
+#include "Camera.h"
 #include "Cube.h"
 #include "DiffuseIluminationSource.h"
 #include "ShaderProgram.h"
+#include "WindowComponent.h"
+#include <glm/glm.hpp>
 #include <vector>
 
 class GravityScenario : public Scenario
 {
 public:
-	GravityScenario(std::vector<ShaderProgram*> shaderPrograms);
+	GravityScenario();
 	~GravityScenario();
 
-	void setupScenario(std::vector<ShaderProgram*> shaderPrograms);
+	Camera* camera;
 
 private:
 	GameObject* cube;
 	DiffuseIluminationSource* diffuseSource;
+	ShaderProgram* m_shaderProgram;
+	ShaderProgram* m_lightShaderProgram;
 
-	std::vector<GameObject*> objectsList;
+	std::vector<GameObject*> m_objectsList;
+	std::vector<ShaderProgram*> m_shaderPrograms;
+
+	void initShaders();
+	void updateCamera();
+	void renderScenario();
+	void setupScenario();
+	void cleanScenario();
 };
 

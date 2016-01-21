@@ -1,12 +1,9 @@
 #include "Cube.h"
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
 #include <SOIL/SOIL.h>
 
-Cube::Cube(std::vector<ShaderProgram*> shaderPrograms, GLfloat* vertices, glm::vec3* position)
+Cube::Cube(ShaderProgram* shaderProgram, GLfloat* vertices, glm::vec3* position)
 {
-	m_shaderPrograms = shaderPrograms;
+	m_shaderProgram = shaderProgram;
 	m_vertices = (GLfloat*)malloc(sizeof vertices);
 	m_position = (glm::vec3*)malloc(sizeof position);
 	memcpy(m_vertices, vertices, sizeof(vertices));
@@ -85,6 +82,8 @@ void Cube::setup()
 
 void Cube::update()
 {
+	m_shaderProgram->use();
+
 #pragma region Texture
 	// Bind Textures using texture units
 	//glActiveTexture(GL_TEXTURE0);
@@ -96,11 +95,11 @@ void Cube::update()
 #pragma endregion
 
 #pragma region Rendering
-	GLint modelLoc = glGetUniformLocation(m_shaderPrograms.at(0)->programID, "model");
-	GLint viewLoc = glGetUniformLocation(m_shaderPrograms.at(0)->programID, "view");
-	GLint projLoc = glGetUniformLocation(m_shaderPrograms.at(0)->programID, "projection");
-	GLint objectColorLoc = glGetUniformLocation(m_shaderPrograms.at(0)->programID, "objectColor");
-	GLint lightColorLoc = glGetUniformLocation(m_shaderPrograms.at(0)->programID, "lightColor");
+	GLint modelLoc = glGetUniformLocation(m_shaderProgram->programID, "model");
+	GLint viewLoc = glGetUniformLocation(m_shaderProgram->programID, "view");
+	GLint projLoc = glGetUniformLocation(m_shaderProgram->programID, "projection");
+	GLint objectColorLoc = glGetUniformLocation(m_shaderProgram->programID, "objectColor");
+	GLint lightColorLoc = glGetUniformLocation(m_shaderProgram->programID, "lightColor");
 
 	glUniform3f(objectColorLoc, 1.0f, 0.5f, 0.31f);
 	glUniform3f(lightColorLoc, 1.0f, 0.5f, 1.0f);
@@ -121,6 +120,8 @@ void Cube::update()
 	//	glDrawArrays(GL_TRIANGLES, 0, 36);
 	//}
 	glBindVertexArray(0);
+
+	m_shaderProgram->unuse();
 #pragma endregion
 }
 

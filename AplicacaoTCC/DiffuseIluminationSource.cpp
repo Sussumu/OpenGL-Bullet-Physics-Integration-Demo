@@ -41,6 +41,8 @@ void DiffuseIluminationSource::setup()
 
 void DiffuseIluminationSource::update()
 {
+	m_shaderPrograms.at(1)->use();
+
 #pragma region Lighting
 	glm::vec3 lightPosition = { 1.2f, 1.0f, 2.0f };
 	GLint objectColorLoc = glGetUniformLocation(m_shaderPrograms.at(1)->programID, "objectColor");
@@ -54,8 +56,8 @@ void DiffuseIluminationSource::update()
 	GLint projLoc = glGetUniformLocation(m_shaderPrograms.at(1)->programID, "projection");
 
 	glm::mat4 model;
-	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(viewLoc));
-	glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projLoc));
+	//glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+	//glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(proj));
 	model = glm::mat4();
 	model = glm::translate(model, lightPosition);
 	model = glm::scale(model, glm::vec3(0.2f)); 
@@ -65,6 +67,7 @@ void DiffuseIluminationSource::update()
 	glDrawArrays(GL_TRIANGLES, 0, 36);
 	glBindVertexArray(0);
 
+	m_shaderPrograms.at(1)->unuse();
 }
 
 void DiffuseIluminationSource::clean()

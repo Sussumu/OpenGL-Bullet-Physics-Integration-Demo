@@ -8,9 +8,12 @@ Scenario::~Scenario()
 {
 }
 
-void Scenario::setupScenario(ShaderProgram* shaderPrograms)
+void Scenario::setupScenario()
 {
-	// Será sobrescrito pelas classes derivadas
+	for each (GameObject* gameObject in objectsList)
+	{
+		gameObject->setup();
+	}
 }
 
 void Scenario::renderScenario()

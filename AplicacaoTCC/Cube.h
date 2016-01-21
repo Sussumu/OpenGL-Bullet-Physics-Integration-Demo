@@ -6,12 +6,11 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include <vector>
 
 class Cube : public GameObject
 {
 public:
-	Cube(std::vector<ShaderProgram*> shaderPrograms, GLfloat* vertices, glm::vec3* position);
+	Cube(ShaderProgram* shaderProgram, GLfloat* vertices, glm::vec3* position);
 	~Cube();
 
 	void setup();
@@ -19,7 +18,7 @@ public:
 	void clean();
 
 private:
-	std::vector<ShaderProgram*> m_shaderPrograms;
+	ShaderProgram* m_shaderProgram;
 	GLfloat* m_vertices;
 	glm::vec3* m_position;
 	GLuint m_texture1;
