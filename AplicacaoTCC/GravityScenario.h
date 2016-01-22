@@ -3,7 +3,7 @@
 #include "Scenario.h"
 #include "GameObject.h"
 #include "Cube.h"
-#include "DiffuseIluminationSource.h"
+//#include "DiffuseIluminationSource.h"
 #include "ShaderProgram.h"
 #include <vector>
 
@@ -17,7 +17,7 @@ public:
 
 private:
 	GameObject* cube;
-	DiffuseIluminationSource* diffuseSource;
+	//DiffuseIluminationSource* diffuseSource;
 
 	std::vector<GameObject*> objectsList;
 };

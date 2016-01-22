@@ -52,9 +52,6 @@
     <ClInclude Include="Camera.h">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="DiffuseIluminationSource.h">
-      <Filter>GameObjects</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GravityScenario.cpp">
@@ -86,9 +83,6 @@
     </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="DiffuseIluminationSource.cpp">
-      <Filter>GameObjects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
