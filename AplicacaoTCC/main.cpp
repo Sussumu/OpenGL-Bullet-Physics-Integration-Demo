@@ -17,7 +17,7 @@ int main(int argc, char* argv[])
 		if (option > 0)
 		{
 			simulador = new Simulador(option);
-			simulador->gameLoop(option);
+			simulador->gameLoop();
 
 			delete simulador;
 		}

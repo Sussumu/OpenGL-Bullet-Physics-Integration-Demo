@@ -97,5 +97,11 @@
     <None Include="..\x64\Debug\Shaders\colorShading.vert">
       <Filter>Shaders</Filter>
     </None>
+    <None Include="..\x64\Debug\Shaders\lightShading.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\x64\Debug\Shaders\lightShading.vert">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -1,9 +1,9 @@
 #pragma once
 
-#include "WindowComponent.h"
-#include "ShaderProgram.h"
-#include "Scenario.h"
 #include "Camera.h"
+#include "WindowComponent.h"
+#include "Scenario.h"
+#include <vector>
 
 class Simulador
 {
@@ -14,7 +14,7 @@ public:
 
 	bool initializeSystems(); 
 	void setupScenario(int option);
-	bool gameLoop(int scenario);
+	bool gameLoop();
 	
 private:
 
@@ -34,18 +34,15 @@ private:
 
 	// Componentes
 	WindowComponent* m_window { new WindowComponent() };
-	ShaderProgram* m_shaderProgram { new ShaderProgram() };
 
 	Scenario* m_scenario;
 	Camera* m_camera;
 
-	void render(int scenario);
+	void render();
 	void eventHandler();
 	void keyboardHandler(SDL_Keycode key);
 	void mouseHandler(double currentMouseX, double currentMouseY);
 	void mouseScrollHandler(double offset);
 	void endProgram();
-	void initShaders();
-	void updateCamera();
 };
 

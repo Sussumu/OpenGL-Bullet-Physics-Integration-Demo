@@ -1,10 +1,9 @@
 #include "Cube.h"
-#include <iostream>
 #include <SOIL/SOIL.h>
 
-Cube::Cube(GLfloat* vertices, glm::vec3* position)
+Cube::Cube(ShaderProgram* shaderProgram, GLfloat* vertices, glm::vec3* position)
 {
-	// Para copiar um array para outro
+	m_shaderProgram = shaderProgram;
 	m_vertices = (GLfloat*)malloc(sizeof vertices);
 	m_position = (glm::vec3*)malloc(sizeof position);
 	memcpy(m_vertices, vertices, sizeof(vertices));
@@ -81,8 +80,10 @@ void Cube::setup()
 #pragma endregion
 }
 
-void Cube::update(ShaderProgram shaderProgram)
+void Cube::update()
 {
+	m_shaderProgram->use();
+
 #pragma region Texture
 	// Bind Textures using texture units
 	//glActiveTexture(GL_TEXTURE0);
@@ -94,33 +95,33 @@ void Cube::update(ShaderProgram shaderProgram)
 #pragma endregion
 
 #pragma region Rendering
-	// Create transformations
-	//glm::mat4 view;
-	//glm::mat4 projection;
-	//view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
-	//projection = glm::perspective(45.0f, (GLfloat)800 / (GLfloat)600, 0.1f, 100.0f);
-	//// Get their uniform location
-	GLint modelLoc = glGetUniformLocation(shaderProgram.programID, "model");
-	//GLint viewLoc = glGetUniformLocation(shaderProgram.programID, "view");
-	//GLint projLoc = glGetUniformLocation(shaderProgram.programID, "projection");
-	//// Pass the matrices to the shader
-	//glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
-	//// Note: currently we set the projection matrix each frame, but since the projection matrix rarely changes it's often best practice to set it outside the main loop only once.
-	//glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
+	GLint modelLoc = glGetUniformLocation(m_shaderProgram->programID, "model");
+	GLint viewLoc = glGetUniformLocation(m_shaderProgram->programID, "view");
+	GLint projLoc = glGetUniformLocation(m_shaderProgram->programID, "projection");
+	GLint objectColorLoc = glGetUniformLocation(m_shaderProgram->programID, "objectColor");
+	GLint lightColorLoc = glGetUniformLocation(m_shaderProgram->programID, "lightColor");
+
+	glUniform3f(objectColorLoc, 1.0f, 0.5f, 0.31f);
+	glUniform3f(lightColorLoc, 1.0f, 0.5f, 1.0f);
 
 	glBindVertexArray(m_VAO);
-	for (GLuint i = 0; i < 10; i++)
-	{
-		// Calculate the model matrix for each object and pass it to shader before drawing
-		glm::mat4 model;
-		model = glm::translate(model, m_position[i]);
-		GLfloat angle = 20.0f * i;
-		model = glm::rotate(model, angle, glm::vec3(1.0f, 0.3f, 0.5f));
-		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+	glm::mat4 model;
+	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+	glDrawArrays(GL_TRIANGLES, 0, 36);
+	//for (GLuint i = 0; i < 10; i++)
+	//{
+	//	// Calculate the model matrix for each object and pass it to shader before drawing
+	//	glm::mat4 model;
+	//	model = glm::translate(model, m_position[i]);
+	//	GLfloat angle = 20.0f * i;
+	//	model = glm::rotate(model, angle, glm::vec3(1.0f, 0.3f, 0.5f));
+	//	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
-		glDrawArrays(GL_TRIANGLES, 0, 36);
-	}
+	//	glDrawArrays(GL_TRIANGLES, 0, 36);
+	//}
 	glBindVertexArray(0);
+
+	m_shaderProgram->unuse();
 #pragma endregion
 }
 

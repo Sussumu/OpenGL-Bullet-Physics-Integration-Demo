@@ -1,22 +1,24 @@
 #pragma once
 
+#include "GameObject.h"
+#include "ShaderProgram.h"
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include "GameObject.h"
 
 class Cube : public GameObject
 {
 public:
-	Cube(GLfloat vertices[], glm::vec3 position[]);
+	Cube(ShaderProgram* shaderProgram, GLfloat* vertices, glm::vec3* position);
 	~Cube();
 
 	void setup();
-	void update(ShaderProgram shaderProgram);
+	void update();
 	void clean();
 
 private:
+	ShaderProgram* m_shaderProgram;
 	GLfloat* m_vertices;
 	glm::vec3* m_position;
 	GLuint m_texture1;
