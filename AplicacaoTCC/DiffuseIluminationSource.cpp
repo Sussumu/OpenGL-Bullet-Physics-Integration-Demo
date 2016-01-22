@@ -32,8 +32,8 @@ void DiffuseIluminationSource::setup()
 	glEnableVertexAttribArray(0);
 
 	// Normal attribute
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
-	glEnableVertexAttribArray(1);
+	//glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+	//glEnableVertexAttribArray(1);
 
 	glBindVertexArray(0);
 #pragma endregion
@@ -42,13 +42,15 @@ void DiffuseIluminationSource::setup()
 void DiffuseIluminationSource::update()
 {
 	m_shaderPrograms.at(1)->use();
-
+	
 #pragma region Lighting
-	glm::vec3 lightPosition = { 1.2f, 1.0f, 2.0f };
+	glm::vec3 lightPos = { 1.2f, 1.0f, 2.0f };
 	GLint objectColorLoc = glGetUniformLocation(m_shaderPrograms.at(1)->programID, "objectColor");
 	GLint lightColorLoc = glGetUniformLocation(m_shaderPrograms.at(1)->programID, "lightColor");
+	GLint lightPosLoc = glGetUniformLocation(m_shaderPrograms.at(1)->programID, "lightPos");
 	glUniform3f(objectColorLoc, 1.0f, 0.5f, 0.31f);
 	glUniform3f(lightColorLoc, 1.0f, 1.0f, 1.0f);
+	glUniform3f(lightPosLoc, lightPos.x, lightPos.y, lightPos.z);
 #pragma endregion
 
 	GLint modelLoc = glGetUniformLocation(m_shaderPrograms.at(1)->programID, "model");
@@ -59,7 +61,7 @@ void DiffuseIluminationSource::update()
 	//glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 	//glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(proj));
 	model = glm::mat4();
-	model = glm::translate(model, lightPosition);
+	model = glm::translate(model, lightPos);
 	model = glm::scale(model, glm::vec3(0.2f)); 
 	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
