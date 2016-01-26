@@ -1,5 +1,5 @@
 #include "WindowComponent.h"
-#include "ErrorHandle.h"
+#include "ErrorHandler.h"
 
 #include <GL/glew.h>
 

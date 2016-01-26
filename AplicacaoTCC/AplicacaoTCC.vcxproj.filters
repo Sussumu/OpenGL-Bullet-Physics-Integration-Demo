@@ -23,6 +23,9 @@
     <Filter Include="Textures">
       <UniqueIdentifier>{36ff20fa-7d19-44f4-923d-b85494e9910e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Physics">
+      <UniqueIdentifier>{949617c9-74be-4b9e-b66f-60f4e836fb20}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GravityScenario.h">
@@ -33,9 +36,6 @@
     </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="ErrorHandle.h">
-      <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="ShaderProgram.h">
       <Filter>Shaders</Filter>
@@ -52,6 +52,15 @@
     <ClInclude Include="Camera.h">
       <Filter>Utils</Filter>
     </ClInclude>
+    <ClInclude Include="PhysicsHandler.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="ErrorHandler.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="DiffuseIluminationSource.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GravityScenario.cpp">
@@ -62,9 +71,6 @@
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>GameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="ErrorHandle.cpp">
-      <Filter>Utils</Filter>
     </ClCompile>
     <ClCompile Include="ShaderProgram.cpp">
       <Filter>Shaders</Filter>
@@ -83,6 +89,15 @@
     </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsHandler.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="ErrorHandler.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="DiffuseIluminationSource.cpp">
+      <Filter>GameObjects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

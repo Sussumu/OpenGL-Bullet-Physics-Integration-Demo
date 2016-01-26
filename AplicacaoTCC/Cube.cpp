@@ -1,13 +1,18 @@
 #include "Cube.h"
-#include <SOIL/SOIL.h>
 
-Cube::Cube(ShaderProgram* shaderProgram, GLfloat* vertices, glm::vec3* position)
+Cube::Cube(ShaderProgram* shaderProgram, GLfloat* vertices, glm::vec3 position)
 {
 	m_shaderProgram = shaderProgram;
 	m_vertices = (GLfloat*)malloc(sizeof vertices);
-	m_position = (glm::vec3*)malloc(sizeof position);
 	memcpy(m_vertices, vertices, sizeof(vertices));
-	memcpy(m_position, position, sizeof(position));
+	m_position = position;
+
+	hasPhysics = true;
+	shape = new btBoxShape(btVector3(1, 1, 1));
+	*motionState = btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1),
+				  btVector3(btScalar(position.x), btScalar(position.y), btScalar(position.z))));
+	btRigidBody::btRigidBodyConstructionInfo rigidBodyCI(1, motionState, shape, btVector3(0, 0, 0));
+	rigidBody = new btRigidBody(rigidBodyCI);
 }
 
 Cube::~Cube()
@@ -127,6 +132,12 @@ void Cube::update()
 
 void Cube::clean()
 {
+	delete shape;
 	glDeleteVertexArrays(1, &m_VAO);
 	glDeleteBuffers(1, &m_VBO);
+}
+
+btRigidBody* Cube::getRigidBody()
+{
+	return rigidBody;
 }

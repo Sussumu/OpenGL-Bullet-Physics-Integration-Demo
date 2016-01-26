@@ -1,5 +1,5 @@
 #include "Simulador.h"
-#include "ErrorHandle.h"
+#include "ErrorHandler.h"
 #include "GravityScenario.h"
 
 #include <GL/glew.h>

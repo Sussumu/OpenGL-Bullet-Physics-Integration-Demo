@@ -3,13 +3,14 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-DiffuseIluminationSource::DiffuseIluminationSource(std::vector<ShaderProgram*> shaderPrograms, GLfloat* vertices, glm::vec3* position)
+DiffuseIluminationSource::DiffuseIluminationSource(std::vector<ShaderProgram*> shaderPrograms, GLfloat* vertices, glm::vec3 position)
 {
 	m_shaderPrograms = shaderPrograms;
 	m_vertices = (GLfloat*)malloc(sizeof vertices);
-	m_position = (glm::vec3*)malloc(sizeof position);
 	memcpy(m_vertices, vertices, sizeof(vertices));
-	memcpy(m_position, position, sizeof(position));
+	m_position = position;
+
+	hasPhysics = false;
 }
 
 DiffuseIluminationSource::~DiffuseIluminationSource()
@@ -76,4 +77,9 @@ void DiffuseIluminationSource::clean()
 {
 	glDeleteVertexArrays(1, &m_VAO);
 	glDeleteBuffers(1, &m_VBO);
+}
+
+btRigidBody* DiffuseIluminationSource::getRigidBody()
+{
+	return nullptr;
 }

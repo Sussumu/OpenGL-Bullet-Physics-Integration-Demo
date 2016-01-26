@@ -9,17 +9,19 @@
 class DiffuseIluminationSource : public GameObject
 {
 public:
-	DiffuseIluminationSource(std::vector<ShaderProgram*> shaderPrograms, GLfloat* vertices, glm::vec3* position);
+	DiffuseIluminationSource(std::vector<ShaderProgram*> shaderPrograms, GLfloat* vertices, glm::vec3 position);
 	~DiffuseIluminationSource();
 
 	void setup();
 	void update();
 	void clean();
 
+	btRigidBody* getRigidBody();
+
 private:
 	std::vector<ShaderProgram*> m_shaderPrograms;
 	GLfloat* m_vertices;
-	glm::vec3* m_position;
+	glm::vec3 m_position;
 	GLuint m_VBO, m_VAO;
 };
 

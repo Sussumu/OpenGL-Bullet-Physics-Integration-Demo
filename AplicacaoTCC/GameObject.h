@@ -1,5 +1,7 @@
 #pragma once
 
+#include <Bullet/btBulletDynamicsCommon.h>
+
 class GameObject
 {
 public:
@@ -7,12 +9,12 @@ public:
 	GameObject();
 	~GameObject();
 
+	bool hasPhysics;
+
+	virtual btRigidBody* getRigidBody() = 0;
+
 	virtual void setup() = 0;
 	virtual void update() = 0;
 	virtual void clean() = 0;
-
-private:
-
-
 };
 

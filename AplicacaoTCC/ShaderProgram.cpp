@@ -1,5 +1,5 @@
 #include "ShaderProgram.h"
-#include "ErrorHandle.h"
+#include "ErrorHandler.h"
 
 #include <fstream>
 #include <vector>
