@@ -35,3 +35,14 @@ void PhysicsHandler::stepSimulation()
 {
 	dynamicsWorld->stepSimulation(1 / 60.0f, 10);
 }
+
+void PhysicsHandler::cleanRigidBodies(std::vector<GameObject*> gameObjectsList)
+{
+	for each (GameObject* gameObject in gameObjectsList)
+	{
+		if (gameObject->hasPhysics)
+		{
+			dynamicsWorld->removeRigidBody(gameObject->getRigidBody());
+		}
+	}
+}

@@ -1,8 +1,4 @@
 #include "Simulador.h"
-#include "ErrorHandler.h"
-#include "GravityScenario.h"
-
-#include <GL/glew.h>
 
 Simulador::Simulador(int option)
 {

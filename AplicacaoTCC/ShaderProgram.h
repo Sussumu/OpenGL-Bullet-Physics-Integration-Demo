@@ -1,5 +1,8 @@
 #pragma once
 
+#include "ErrorHandler.h"
+#include <fstream>
+#include <vector>
 #include <GL/glew.h>
 #include <string>
 

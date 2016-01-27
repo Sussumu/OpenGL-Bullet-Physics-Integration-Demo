@@ -4,6 +4,7 @@
 #include "GameObject.h"
 #include "Camera.h"
 #include "Cube.h"
+#include "Ground.h"
 #include "DiffuseIluminationSource.h"
 #include "PhysicsHandler.h"
 #include "ShaderProgram.h"
@@ -22,7 +23,8 @@ public:
 
 private:
 	GameObject* cube;
-	DiffuseIluminationSource* diffuseSource;
+	GameObject* diffuseSource;
+	GameObject* ground;
 	ShaderProgram* m_shaderProgram;
 	ShaderProgram* m_lightShaderProgram;
 

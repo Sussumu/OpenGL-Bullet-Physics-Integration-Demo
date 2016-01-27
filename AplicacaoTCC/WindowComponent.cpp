@@ -1,7 +1,4 @@
 #include "WindowComponent.h"
-#include "ErrorHandler.h"
-
-#include <GL/glew.h>
 
 WindowComponent::WindowComponent()
 {

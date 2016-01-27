@@ -12,6 +12,7 @@ public:
 
 	void setupRigidBodies(std::vector<GameObject*> gameObjectsList);
 	void stepSimulation();
+	void cleanRigidBodies(std::vector<GameObject*> gameObjectsList);
 
 private:
 	btBroadphaseInterface* broadphase;

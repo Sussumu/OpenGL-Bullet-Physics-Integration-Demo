@@ -11,7 +11,7 @@
 class Cube : public GameObject
 {
 public:
-	Cube(ShaderProgram* shaderProgram, GLfloat* vertices, glm::vec3 position, bool enablePhysics);
+	Cube(ShaderProgram* shaderProgram, GLfloat* vertices, glm::vec3 position, float mass, bool enablePhysics);
 	~Cube();
 
 	void setup();
@@ -30,9 +30,10 @@ private:
 	//GLuint m_texture2;
 	GLuint m_VBO, m_VAO;
 
+	float m_mass;
+	btVector3 m_inertia;
 	btCollisionShape* shape;
 	btDefaultMotionState* motionState;
 	btRigidBody* rigidBody;
 	btScalar yaw, pitch, roll;
 };
-

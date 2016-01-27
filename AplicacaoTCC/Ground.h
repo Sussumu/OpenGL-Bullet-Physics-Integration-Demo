@@ -6,13 +6,12 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include <vector>
 
-class DiffuseIluminationSource : public GameObject
+class Ground : public GameObject
 {
 public:
-	DiffuseIluminationSource(std::vector<ShaderProgram*> shaderPrograms, GLfloat* vertices, glm::vec3 position, bool enablePhysics);
-	~DiffuseIluminationSource();
+	Ground(ShaderProgram* shaderProgram, GLfloat* vertices, glm::vec3 position, bool enablePhysics);
+	~Ground();
 
 	void setup();
 	void updatePhysics();
@@ -22,9 +21,10 @@ public:
 	btRigidBody* getRigidBody();
 
 private:
-	std::vector<ShaderProgram*> m_shaderPrograms;
+	ShaderProgram* m_shaderProgram;
 	GLfloat* m_vertices;
 	glm::vec3 m_position;
+	glm::vec3 m_rotation;
 	GLuint m_VBO, m_VAO;
 
 	btCollisionShape* shape;
@@ -32,4 +32,3 @@ private:
 	btRigidBody* rigidBody;
 	btScalar yaw, pitch, roll;
 };
-

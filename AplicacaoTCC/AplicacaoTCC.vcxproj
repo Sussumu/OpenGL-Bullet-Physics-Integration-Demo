@@ -140,10 +140,12 @@
     <ClInclude Include="ErrorHandler.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GravityScenario.h" />
+    <ClInclude Include="Ground.h" />
     <ClInclude Include="PhysicsHandler.h" />
     <ClInclude Include="Scenario.h" />
     <ClInclude Include="ShaderProgram.h" />
     <ClInclude Include="Simulador.h" />
+    <ClInclude Include="Sphere.h" />
     <ClInclude Include="WindowComponent.h" />
   </ItemGroup>
   <ItemGroup>
@@ -153,11 +155,13 @@
     <ClCompile Include="ErrorHandler.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GravityScenario.cpp" />
+    <ClCompile Include="Ground.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PhysicsHandler.cpp" />
     <ClCompile Include="Scenario.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
     <ClCompile Include="Simulador.cpp" />
+    <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="WindowComponent.cpp" />
   </ItemGroup>
   <ItemGroup>

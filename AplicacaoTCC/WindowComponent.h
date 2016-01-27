@@ -1,5 +1,7 @@
 #pragma once
 
+#include "ErrorHandler.h"
+#include <GL/glew.h>
 #include <SDL/SDL.h>
 
 #define SCREEN_WIDTH 800

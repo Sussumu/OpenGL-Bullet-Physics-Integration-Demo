@@ -1,8 +1,5 @@
 #include "ErrorHandler.h"
 
-#include <SDL/SDL.h>
-#include <iostream>
-
 // Finaliza o programa mostrando a mensagem de erro do SDL
 void fatalError(std::string message)
 {

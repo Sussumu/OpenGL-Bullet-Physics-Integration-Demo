@@ -1,17 +1,19 @@
 #include "Cube.h"
 
-Cube::Cube(ShaderProgram* shaderProgram, GLfloat* vertices, glm::vec3 position, bool enablePhysics)
+Cube::Cube(ShaderProgram* shaderProgram, GLfloat* vertices, glm::vec3 position, float mass, bool enablePhysics)
 {
 	m_shaderProgram = shaderProgram;
 	m_vertices = (GLfloat*)malloc(sizeof vertices);
 	memcpy(m_vertices, vertices, sizeof(vertices));
 	m_position = position;
 
+	m_mass = mass;
 	hasPhysics = enablePhysics;
 	shape = new btBoxShape(btVector3(1, 1, 1));
 	*motionState = btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1),
-				  btVector3(btScalar(position.x), btScalar(position.y), btScalar(position.z))));
-	btRigidBody::btRigidBodyConstructionInfo rigidBodyCI(1, motionState, shape, btVector3(0, 0, 0));
+				   btVector3(btScalar(position.x), btScalar(position.y), btScalar(position.z))));
+	shape->calculateLocalInertia(mass, m_inertia);
+	btRigidBody::btRigidBodyConstructionInfo rigidBodyCI(1, motionState, shape, m_inertia);
 	rigidBody = new btRigidBody(rigidBodyCI);
 }
 
@@ -140,6 +142,7 @@ void Cube::update()
 void Cube::clean()
 {
 	delete shape;
+	delete rigidBody->getMotionState();
 	delete rigidBody;
 	glDeleteVertexArrays(1, &m_VAO);
 	glDeleteBuffers(1, &m_VBO);

@@ -1,8 +1,4 @@
 #include "ShaderProgram.h"
-#include "ErrorHandler.h"
-
-#include <fstream>
-#include <vector>
 
 ShaderProgram::ShaderProgram()
 {

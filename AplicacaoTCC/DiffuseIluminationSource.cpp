@@ -1,7 +1,4 @@
 #include "DiffuseIluminationSource.h"
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
 
 DiffuseIluminationSource::DiffuseIluminationSource(std::vector<ShaderProgram*> shaderPrograms, GLfloat* vertices, glm::vec3 position, bool enablePhysics)
 {
@@ -96,6 +93,7 @@ void DiffuseIluminationSource::update()
 void DiffuseIluminationSource::clean()
 {
 	delete shape;
+	delete rigidBody->getMotionState();
 	delete rigidBody;
 	glDeleteVertexArrays(1, &m_VAO);
 	glDeleteBuffers(1, &m_VBO);
