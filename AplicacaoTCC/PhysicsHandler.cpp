@@ -30,3 +30,8 @@ void PhysicsHandler::setupRigidBodies(std::vector<GameObject*> gameObjectsList)
 		}
 	}
 }
+
+void PhysicsHandler::stepSimulation()
+{
+	dynamicsWorld->stepSimulation(1 / 60.0f, 10);
+}

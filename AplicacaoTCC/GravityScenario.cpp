@@ -89,11 +89,11 @@ void GravityScenario::setupScenario()
 	//	glm::vec3( 1.5f,  0.2f,  -1.5f),
 	//	glm::vec3(-1.3f,  1.0f,  -1.5f)
 	//};
-	cube = new Cube(m_shaderPrograms.at(0), vertices, glm::vec3(0, 0, 0));
+	cube = new Cube(m_shaderPrograms.at(0), vertices, glm::vec3(0, 0, 0), true);
 	m_objectsList.push_back(cube);
 	
 	// Iluminação
-	diffuseSource = new DiffuseIluminationSource(m_shaderPrograms, vertices, glm::vec3(0, 0, 0));
+	diffuseSource = new DiffuseIluminationSource(m_shaderPrograms, vertices, glm::vec3(0, 0, 0), false);
 	m_objectsList.push_back(diffuseSource);
 
 	Scenario::objectsList = m_objectsList;
@@ -127,6 +127,5 @@ void GravityScenario::renderScenario()
 
 void GravityScenario::cleanScenario()
 {
-	Scenario::objectsList = m_objectsList;
 	Scenario::cleanScenario();
 }

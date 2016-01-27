@@ -3,14 +3,19 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-DiffuseIluminationSource::DiffuseIluminationSource(std::vector<ShaderProgram*> shaderPrograms, GLfloat* vertices, glm::vec3 position)
+DiffuseIluminationSource::DiffuseIluminationSource(std::vector<ShaderProgram*> shaderPrograms, GLfloat* vertices, glm::vec3 position, bool enablePhysics)
 {
 	m_shaderPrograms = shaderPrograms;
 	m_vertices = (GLfloat*)malloc(sizeof vertices);
 	memcpy(m_vertices, vertices, sizeof(vertices));
 	m_position = position;
 
-	hasPhysics = false;
+	hasPhysics = enablePhysics;
+	shape = new btBoxShape(btVector3(1, 1, 1));
+	*motionState = btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1),
+		btVector3(btScalar(position.x), btScalar(position.y), btScalar(position.z))));
+	btRigidBody::btRigidBodyConstructionInfo rigidBodyCI(1, motionState, shape, btVector3(0, 0, 0));
+	rigidBody = new btRigidBody(rigidBodyCI);
 }
 
 DiffuseIluminationSource::~DiffuseIluminationSource()
@@ -40,12 +45,24 @@ void DiffuseIluminationSource::setup()
 #pragma endregion
 }
 
+void DiffuseIluminationSource::updatePhysics()
+{
+	btTransform transform;
+	rigidBody->getMotionState()->getWorldTransform(transform);
+
+	m_position.x = transform.getOrigin().getX();
+	m_position.y = transform.getOrigin().getY();
+	m_position.z = transform.getOrigin().getZ();
+
+	transform.getBasis().getEulerYPR(yaw, pitch, roll);
+}
+
 void DiffuseIluminationSource::update()
 {
 	m_shaderPrograms.at(1)->use();
 	
 #pragma region Lighting
-	glm::vec3 lightPos = { 1.2f, 1.0f, 2.0f };
+	glm::vec3 lightPos = m_position;
 	GLint objectColorLoc = glGetUniformLocation(m_shaderPrograms.at(1)->programID, "objectColor");
 	GLint lightColorLoc = glGetUniformLocation(m_shaderPrograms.at(1)->programID, "lightColor");
 	GLint lightPosLoc = glGetUniformLocation(m_shaderPrograms.at(1)->programID, "lightPos");
@@ -63,6 +80,9 @@ void DiffuseIluminationSource::update()
 	//glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(proj));
 	model = glm::mat4();
 	model = glm::translate(model, lightPos);
+	model = glm::rotate(model, yaw, glm::vec3(1.0f, 0.0f, 0.0f));
+	model = glm::rotate(model, pitch, glm::vec3(0.0f, 1.0f, 0.0f));
+	model = glm::rotate(model, roll, glm::vec3(1.0f, 0.0f, 1.0f));
 	model = glm::scale(model, glm::vec3(0.2f)); 
 	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
@@ -75,6 +95,8 @@ void DiffuseIluminationSource::update()
 
 void DiffuseIluminationSource::clean()
 {
+	delete shape;
+	delete rigidBody;
 	glDeleteVertexArrays(1, &m_VAO);
 	glDeleteBuffers(1, &m_VBO);
 }

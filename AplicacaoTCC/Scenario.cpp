@@ -16,6 +16,14 @@ void Scenario::setupScenario()
 	}
 }
 
+void Scenario::updatePhysics()
+{
+	for each (GameObject* gameObject in objectsList)
+	{
+		gameObject->updatePhysics();
+	}
+}
+
 void Scenario::renderScenario()
 {
 	for each (GameObject* gameObject in objectsList)

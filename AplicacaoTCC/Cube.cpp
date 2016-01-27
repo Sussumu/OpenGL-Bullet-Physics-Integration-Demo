@@ -1,13 +1,13 @@
 #include "Cube.h"
 
-Cube::Cube(ShaderProgram* shaderProgram, GLfloat* vertices, glm::vec3 position)
+Cube::Cube(ShaderProgram* shaderProgram, GLfloat* vertices, glm::vec3 position, bool enablePhysics)
 {
 	m_shaderProgram = shaderProgram;
 	m_vertices = (GLfloat*)malloc(sizeof vertices);
 	memcpy(m_vertices, vertices, sizeof(vertices));
 	m_position = position;
 
-	hasPhysics = true;
+	hasPhysics = enablePhysics;
 	shape = new btBoxShape(btVector3(1, 1, 1));
 	*motionState = btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1),
 				  btVector3(btScalar(position.x), btScalar(position.y), btScalar(position.z))));
@@ -85,6 +85,18 @@ void Cube::setup()
 #pragma endregion
 }
 
+void Cube::updatePhysics()
+{
+	btTransform transform;
+	rigidBody->getMotionState()->getWorldTransform(transform);
+
+	m_position.x = transform.getOrigin().getX();
+	m_position.y = transform.getOrigin().getY();
+	m_position.z = transform.getOrigin().getZ();
+
+	transform.getBasis().getEulerYPR(yaw, pitch, roll);
+}
+
 void Cube::update()
 {
 	m_shaderProgram->use();
@@ -111,19 +123,14 @@ void Cube::update()
 
 	glBindVertexArray(m_VAO);
 	glm::mat4 model;
+	model = glm::translate(model, m_position);
+	model = glm::rotate(model, yaw, glm::vec3(1.0f, 0.0f, 0.0f));
+	model = glm::rotate(model, pitch, glm::vec3(0.0f, 1.0f, 0.0f));
+	model = glm::rotate(model, roll, glm::vec3(1.0f, 0.0f, 1.0f));
+
 	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 	glDrawArrays(GL_TRIANGLES, 0, 36);
-	//for (GLuint i = 0; i < 10; i++)
-	//{
-	//	// Calculate the model matrix for each object and pass it to shader before drawing
-	//	glm::mat4 model;
-	//	model = glm::translate(model, m_position[i]);
-	//	GLfloat angle = 20.0f * i;
-	//	model = glm::rotate(model, angle, glm::vec3(1.0f, 0.3f, 0.5f));
-	//	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
-	//	glDrawArrays(GL_TRIANGLES, 0, 36);
-	//}
 	glBindVertexArray(0);
 
 	m_shaderProgram->unuse();
@@ -133,6 +140,7 @@ void Cube::update()
 void Cube::clean()
 {
 	delete shape;
+	delete rigidBody;
 	glDeleteVertexArrays(1, &m_VAO);
 	glDeleteBuffers(1, &m_VBO);
 }

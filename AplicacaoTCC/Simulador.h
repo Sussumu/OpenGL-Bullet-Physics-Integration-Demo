@@ -38,6 +38,7 @@ private:
 	Scenario* m_scenario;
 	Camera* m_camera;
 
+	void updatePhysics();
 	void render();
 	void eventHandler();
 	void keyboardHandler(SDL_Keycode key);

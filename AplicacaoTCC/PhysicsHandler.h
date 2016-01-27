@@ -11,6 +11,7 @@ public:
 	~PhysicsHandler();
 
 	void setupRigidBodies(std::vector<GameObject*> gameObjectsList);
+	void stepSimulation();
 
 private:
 	btBroadphaseInterface* broadphase;

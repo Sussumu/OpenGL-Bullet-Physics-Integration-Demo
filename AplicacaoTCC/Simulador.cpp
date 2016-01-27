@@ -45,6 +45,7 @@ bool Simulador::gameLoop()
 
 		///////////////////////////////////////////////////
 		eventHandler();
+		updatePhysics();
 		render();
 		///////////////////////////////////////////////////
 
@@ -59,6 +60,12 @@ bool Simulador::gameLoop()
 	}
 
 	return true;
+}
+
+// Atualiza a física em cada gameobject
+void Simulador::updatePhysics()
+{
+	m_scenario->updatePhysics();
 }
 
 // Chama o método renderScenario() do scenario
