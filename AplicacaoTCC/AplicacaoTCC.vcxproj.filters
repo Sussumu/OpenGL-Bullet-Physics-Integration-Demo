@@ -64,7 +64,9 @@
     <ClInclude Include="Ground.h">
       <Filter>GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="Sphere.h" />
+    <ClInclude Include="Sphere.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GravityScenario.cpp">
@@ -106,7 +108,9 @@
     <ClCompile Include="Ground.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="Sphere.cpp" />
+    <ClCompile Include="Sphere.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Textures\container.jpg">
