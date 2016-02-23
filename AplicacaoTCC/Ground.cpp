@@ -8,8 +8,8 @@ Ground::Ground(ShaderProgram* shaderProgram, GLfloat* vertices, glm::vec3 positi
 	m_position = position;
 
 	hasPhysics = enablePhysics;
-	*shape = btStaticPlaneShape(btVector3(0, m_position.y, 0), 1);
-	*motionState = btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1),
+	shape = new btStaticPlaneShape(btVector3(0, m_position.y, 0), 1);
+	motionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1),
 		btVector3(btScalar(position.x), btScalar(position.y), btScalar(position.z))));
 	btRigidBody::btRigidBodyConstructionInfo rigidBodyCI(1, motionState, shape, btVector3(0, 0, 0));
 	rigidBody = new btRigidBody(rigidBodyCI);

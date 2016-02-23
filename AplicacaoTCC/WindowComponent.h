@@ -13,7 +13,7 @@ public:
 
 	WindowComponent();
 	~WindowComponent();
-
+	
 	bool wantToCalculateFps{ true };
 	float m_maxFps{ 60.0f };
 

@@ -4,6 +4,8 @@
 #include <fstream>
 #include <vector>
 #include <GL/glew.h>
+#include <GL/GLU.h>
+#include <GL/GL.h>
 #include <string>
 
 class ShaderProgram

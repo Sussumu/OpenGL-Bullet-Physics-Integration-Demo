@@ -19,16 +19,16 @@ public:
 	GravityScenario();
 	~GravityScenario();
 
-	Camera* camera;
+	Camera* camera { nullptr };
 
 private:
-	GameObject* cube;
-	GameObject* diffuseSource;
-	GameObject* ground;
-	ShaderProgram* m_shaderProgram;
-	ShaderProgram* m_lightShaderProgram;
+	GameObject* cube { nullptr };
+	GameObject* diffuseSource { nullptr };
+	GameObject* ground { nullptr };
+	ShaderProgram* m_shaderProgram = new ShaderProgram();
+	ShaderProgram* m_lightShaderProgram = new ShaderProgram();
 
-	PhysicsHandler* m_physicsHandler;
+	PhysicsHandler* m_physicsHandler = new PhysicsHandler();
 
 	std::vector<GameObject*> m_objectsList;
 	std::vector<ShaderProgram*> m_shaderPrograms;

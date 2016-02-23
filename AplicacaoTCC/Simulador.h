@@ -39,7 +39,7 @@ private:
 	WindowComponent* m_window { new WindowComponent() };
 
 	Scenario* m_scenario;
-	Camera* m_camera;
+	Camera* m_camera = new Camera();
 
 	void updatePhysics();
 	void render();

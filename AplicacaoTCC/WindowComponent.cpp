@@ -46,6 +46,7 @@ bool WindowComponent::initializeWindow()
 	// Setup OpenGL
 	glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 	glEnable(GL_DEPTH_TEST);
 
 	// Vsync

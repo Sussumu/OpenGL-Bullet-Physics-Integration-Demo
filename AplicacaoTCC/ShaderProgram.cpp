@@ -1,4 +1,5 @@
 #include "ShaderProgram.h"
+#include "WindowComponent.h"
 
 ShaderProgram::ShaderProgram()
 {

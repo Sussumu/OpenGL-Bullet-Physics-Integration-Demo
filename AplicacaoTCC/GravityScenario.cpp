@@ -81,7 +81,7 @@ void GravityScenario::setupScenario()
 	m_objectsList.push_back(ground);
 
 	// Cubo
-	GLfloat vertices[] ={
+	GLfloat vertices2[] ={
 		-0.5f, -0.5f, -0.5f,   0.0f, 0.0f,  -1.0f,
 		 0.5f, -0.5f, -0.5f,   0.0f, 0.0f,  -1.0f,
 		 0.5f,  0.5f, -0.5f,   0.0f, 0.0f,  -1.0f,
@@ -124,11 +124,11 @@ void GravityScenario::setupScenario()
 		-0.5f,  0.5f,  0.5f,   0.0f, 1.0f,   0.0f,
 		-0.5f,  0.5f, -0.5f,   0.0f, 1.0f,   0.0f
 	};
-	cube = new Cube(m_shaderPrograms.at(0), vertices, glm::vec3(0, 10, 0), 1.0f, true);
+	cube = new Cube(m_shaderPrograms.at(0), vertices2, glm::vec3(0, 10, 0), 1.0f, true);
 	m_objectsList.push_back(cube);
 	
 	// Iluminação
-	diffuseSource = new DiffuseIluminationSource(m_shaderPrograms, vertices, glm::vec3(2, 9, 2), false);
+	diffuseSource = new DiffuseIluminationSource(m_shaderPrograms, vertices2, glm::vec3(2, 9, 2), false);
 	m_objectsList.push_back(diffuseSource);
 
 	Scenario::objectsList = m_objectsList;

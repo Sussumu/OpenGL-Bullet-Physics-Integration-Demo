@@ -9,7 +9,7 @@ DiffuseIluminationSource::DiffuseIluminationSource(std::vector<ShaderProgram*> s
 
 	hasPhysics = enablePhysics;
 	shape = new btBoxShape(btVector3(1, 1, 1));
-	*motionState = btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1),
+	motionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1),
 		btVector3(btScalar(position.x), btScalar(position.y), btScalar(position.z))));
 	btRigidBody::btRigidBodyConstructionInfo rigidBodyCI(1, motionState, shape, btVector3(0, 0, 0));
 	rigidBody = new btRigidBody(rigidBodyCI);

@@ -10,7 +10,7 @@ Cube::Cube(ShaderProgram* shaderProgram, GLfloat* vertices, glm::vec3 position, 
 	m_mass = mass;
 	hasPhysics = enablePhysics;
 	shape = new btBoxShape(btVector3(1, 1, 1));
-	*motionState = btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1),
+	motionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1),
 				   btVector3(btScalar(position.x), btScalar(position.y), btScalar(position.z))));
 	shape->calculateLocalInertia(mass, m_inertia);
 	btRigidBody::btRigidBodyConstructionInfo rigidBodyCI(1, motionState, shape, m_inertia);
