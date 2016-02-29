@@ -140,7 +140,7 @@ void GravityScenario::setupScenario()
 void GravityScenario::updateCamera()
 {
 	glm::mat4 view;
-	view = camera->GetViewMatrix();
+	view = camera->GetViewMatrix(); // LookAt
 	glm::mat4 projection;
 	projection = glm::perspective(camera->Zoom, (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.1f, 1000.0f);
 
@@ -156,6 +156,7 @@ void GravityScenario::renderScenario()
 {
 	glClearDepth(1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClearColor(87, 199, 193, 1.0);
 
 	Scenario::renderScenario();
 }

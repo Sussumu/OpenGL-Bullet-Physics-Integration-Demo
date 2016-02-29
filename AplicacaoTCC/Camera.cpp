@@ -24,6 +24,9 @@ Camera::Camera(GLfloat posX, GLfloat posY, GLfloat posZ, GLfloat upX, GLfloat up
 
 glm::mat4 Camera::GetViewMatrix()
 {
+	std::cout << "Posição     x " << this->Position.x << "     y " << this->Position.y << "     z " << this->Position.z << std::endl;
+	std::cout << "LookAt      x " << this->Position.x + this->Front.x << "     y " << this->Position.y + this->Front.y << "     z " << this->Position.z + this->Front.z << std::endl;
+
 	return glm::lookAt(this->Position, this->Position + this->Front, this->Up);
 }
 
