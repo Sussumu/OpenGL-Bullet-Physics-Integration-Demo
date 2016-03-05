@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ErrorHandler.h"
+#include "Logger.h"
 #include <GL/glew.h>
 #include <SDL/SDL.h>
 
@@ -14,7 +14,7 @@ public:
 	WindowComponent();
 	~WindowComponent();
 	
-	bool wantToCalculateFps{ true };
+	bool wantToCalculateFps{ false };
 	float m_maxFps{ 60.0f };
 
 	SDL_Window* getWindow();

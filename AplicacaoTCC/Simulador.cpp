@@ -92,6 +92,7 @@ void Simulador::eventHandler()
 			break;
 		case SDL_MOUSEWHEEL:
 			mouseScrollHandler(sdlevent.wheel.y);
+			break;
 		}
 	}
 }

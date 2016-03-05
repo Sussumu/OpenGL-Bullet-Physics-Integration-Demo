@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ErrorHandler.h"
+#include "Logger.h"
 #include <fstream>
 #include <vector>
 #include <GL/glew.h>

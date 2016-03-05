@@ -6,12 +6,15 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <string>
 
 class Ground : public GameObject
 {
 public:
 	Ground(ShaderProgram* shaderProgram, GLfloat* vertices, glm::vec3 position, bool enablePhysics);
 	~Ground();
+
+	const std::string name{ "Ground" };
 
 	void setup();
 	void updatePhysics();

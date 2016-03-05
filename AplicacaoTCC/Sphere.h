@@ -7,12 +7,15 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <SOIL/SOIL.h>
+#include <string>
 
 class Sphere : public GameObject
 {
 public:
 	Sphere(ShaderProgram* shaderProgram, float radius, float precision, glm::vec3 position, float mass, bool enablePhysics);
 	~Sphere();
+
+	const std::string name{ "Sphere" };
 
 	void setup();
 	void updatePhysics();

@@ -159,6 +159,7 @@ void GravityScenario::renderScenario()
 	glClearColor(87, 199, 193, 1.0);
 
 	Scenario::renderScenario();
+	updateCamera();
 }
 
 void GravityScenario::cleanScenario()

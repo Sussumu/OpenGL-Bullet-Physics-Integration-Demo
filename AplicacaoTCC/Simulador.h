@@ -3,7 +3,7 @@
 #include "Camera.h"
 #include "WindowComponent.h"
 #include "Scenario.h"
-#include "ErrorHandler.h"
+#include "Logger.h"
 #include "GravityScenario.h"
 #include <GL/glew.h>
 #include <vector>

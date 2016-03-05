@@ -3,6 +3,7 @@
 
 int main(int argc, char* argv[])
 {
+	setlocale(LC_ALL, "");
 	Simulador* simulador;
 	
 	// Menu
@@ -17,6 +18,7 @@ int main(int argc, char* argv[])
 		if (option > 0)
 		{
 			simulador = new Simulador(option);
+			system("cls");
 			simulador->gameLoop();
 
 			delete simulador;

@@ -1,4 +1,5 @@
 #include "Scenario.h"
+#include "Logger.h"
 
 Scenario::Scenario()
 {

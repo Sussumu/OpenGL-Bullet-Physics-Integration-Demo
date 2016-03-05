@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="Scenarios">
       <UniqueIdentifier>{dbf066c6-cba1-438e-aa4c-3f52048a6ee0}</UniqueIdentifier>
     </Filter>
@@ -55,9 +51,6 @@
     <ClInclude Include="PhysicsHandler.h">
       <Filter>Physics</Filter>
     </ClInclude>
-    <ClInclude Include="ErrorHandler.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
     <ClInclude Include="DiffuseIluminationSource.h">
       <Filter>GameObjects</Filter>
     </ClInclude>
@@ -66,6 +59,9 @@
     </ClInclude>
     <ClInclude Include="Sphere.h">
       <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Logger.h">
+      <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -99,9 +95,6 @@
     <ClCompile Include="PhysicsHandler.cpp">
       <Filter>Physics</Filter>
     </ClCompile>
-    <ClCompile Include="ErrorHandler.cpp">
-      <Filter>Utils</Filter>
-    </ClCompile>
     <ClCompile Include="DiffuseIluminationSource.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
@@ -110,6 +103,9 @@
     </ClCompile>
     <ClCompile Include="Sphere.cpp">
       <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Logger.cpp">
+      <Filter>Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

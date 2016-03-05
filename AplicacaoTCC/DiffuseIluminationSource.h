@@ -7,12 +7,15 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <vector>
+#include <string>
 
 class DiffuseIluminationSource : public GameObject
 {
 public:
 	DiffuseIluminationSource(std::vector<ShaderProgram*> shaderPrograms, GLfloat* vertices, glm::vec3 position, bool enablePhysics);
 	~DiffuseIluminationSource();
+
+	const std::string name{ "Lighting Cube" };
 
 	void setup();
 	void updatePhysics();

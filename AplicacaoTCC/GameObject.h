@@ -1,5 +1,6 @@
 #pragma once
 
+#include <string>
 #include <Bullet/btBulletDynamicsCommon.h>
 
 class GameObject
@@ -10,6 +11,7 @@ public:
 	~GameObject();
 
 	bool hasPhysics;
+	std::string name;
 
 	virtual btRigidBody* getRigidBody() = 0;
 

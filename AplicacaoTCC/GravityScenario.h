@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Scenario.h"
+#include "Logger.h"
 #include "GameObject.h"
 #include "Camera.h"
 #include "Cube.h"
