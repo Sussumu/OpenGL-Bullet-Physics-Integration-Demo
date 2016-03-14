@@ -142,10 +142,12 @@
     <ClInclude Include="GravityScenario.h" />
     <ClInclude Include="Ground.h" />
     <ClInclude Include="PhysicsHandler.h" />
-    <ClInclude Include="Scenario.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="Scenarios.h" />
     <ClInclude Include="ShaderProgram.h" />
     <ClInclude Include="Simulador.h" />
     <ClInclude Include="Sphere.h" />
+    <ClInclude Include="TestScenario.h" />
     <ClInclude Include="WindowComponent.h" />
   </ItemGroup>
   <ItemGroup>
@@ -158,10 +160,11 @@
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PhysicsHandler.cpp" />
-    <ClCompile Include="Scenario.cpp" />
+    <ClCompile Include="Scenarios.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
     <ClCompile Include="Simulador.cpp" />
     <ClCompile Include="Sphere.cpp" />
+    <ClCompile Include="TestScenario.cpp" />
     <ClCompile Include="WindowComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -183,6 +186,9 @@
     <ProjectReference Include="..\Bibliotecas\bullet3-2.83.7\BUILD\src\LinearMath\LinearMath.vcxproj">
       <Project>{dfa638e4-c70c-373c-834d-e5043f7764eb}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="AplicacaoTCC.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,7 +1,9 @@
 #pragma once
 
+#include "Camera.h"
 #include "GameObject.h"
 #include <vector>
+#include <glm/glm.hpp>
 
 class Scenario
 {
@@ -13,10 +15,10 @@ public:
 
 	virtual void setupScenario();
 	virtual void updatePhysics();
-	virtual void renderScenario();
+	virtual void renderScenario(Camera* camera);
 	virtual void cleanScenario();
 
 private:
-	
+
 };
 

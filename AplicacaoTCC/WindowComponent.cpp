@@ -46,7 +46,13 @@ bool WindowComponent::initializeWindow()
 	// Setup OpenGL
 	glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+	
+	// Cursor lock
+	SDL_SetRelativeMouseMode(SDL_TRUE);
+
 	glEnable(GL_DEPTH_TEST);
 
 	// Vsync
@@ -105,7 +111,9 @@ void WindowComponent::calculateFPS()
 	frameCounter++;
 	if (frameCounter == 60)
 	{
-		printf("%.0f\n", m_fps);
+		//printf("%.0f\n", m_fps);
+		gotoxy(0, 2);
+		showMessage(std::to_string((int)m_fps) + " fps");
 		frameCounter = 0;
 	}
 }

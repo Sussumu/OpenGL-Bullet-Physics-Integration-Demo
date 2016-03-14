@@ -4,6 +4,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AplicacaoTCC", "AplicacaoTCC\AplicacaoTCC.vcxproj", "{E08BA8C7-4167-40F4-A683-9413269C620D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FB6F4046-2D08-3287-8EF6-AEAA65503EE3} = {FB6F4046-2D08-3287-8EF6-AEAA65503EE3}
+		{EA4D3B9F-91B0-3139-A972-6F86585C8FCD} = {EA4D3B9F-91B0-3139-A972-6F86585C8FCD}
+		{DFA638E4-C70C-373C-834D-E5043F7764EB} = {DFA638E4-C70C-373C-834D-E5043F7764EB}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BulletCollision", "Bibliotecas\bullet3-2.83.7\BUILD\src\BulletCollision\BulletCollision.vcxproj", "{FB6F4046-2D08-3287-8EF6-AEAA65503EE3}"
 EndProject

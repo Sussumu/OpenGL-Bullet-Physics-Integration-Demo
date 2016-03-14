@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Scenario.h"
+#include "Scenarios.h"
 #include "Logger.h"
 #include "GameObject.h"
 #include "Camera.h"
@@ -19,15 +19,16 @@ class GravityScenario : public Scenario
 public:
 	GravityScenario();
 	~GravityScenario();
-
-	Camera* camera { nullptr };
-
+	
 private:
+
 	GameObject* cube { nullptr };
 	GameObject* diffuseSource { nullptr };
 	GameObject* ground { nullptr };
 	ShaderProgram* m_shaderProgram = new ShaderProgram();
 	ShaderProgram* m_lightShaderProgram = new ShaderProgram();
+
+	glm::mat4 view, projection;
 
 	PhysicsHandler* m_physicsHandler = new PhysicsHandler();
 
@@ -35,8 +36,8 @@ private:
 	std::vector<ShaderProgram*> m_shaderPrograms;
 
 	void initShaders();
-	void updateCamera();
-	void renderScenario();
+	void updateCamera(Camera* camera);
+	void renderScenario(Camera* camera);
 	void setupScenario();
 	void cleanScenario();
 };

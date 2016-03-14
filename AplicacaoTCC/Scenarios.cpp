@@ -1,5 +1,4 @@
-#include "Scenario.h"
-#include "Logger.h"
+#include "Scenarios.h"
 
 Scenario::Scenario()
 {
@@ -25,7 +24,7 @@ void Scenario::updatePhysics()
 	}
 }
 
-void Scenario::renderScenario()
+void Scenario::renderScenario(Camera* camera)
 {
 	for each (GameObject* gameObject in objectsList)
 	{

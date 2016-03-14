@@ -27,9 +27,6 @@
     <ClInclude Include="GravityScenario.h">
       <Filter>Scenarios</Filter>
     </ClInclude>
-    <ClInclude Include="Scenario.h">
-      <Filter>Scenarios</Filter>
-    </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>GameObjects</Filter>
     </ClInclude>
@@ -44,9 +41,6 @@
     </ClInclude>
     <ClInclude Include="Cube.h">
       <Filter>GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="PhysicsHandler.h">
       <Filter>Physics</Filter>
@@ -63,12 +57,19 @@
     <ClInclude Include="Logger.h">
       <Filter>Utils</Filter>
     </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="TestScenario.h">
+      <Filter>Scenarios</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenarios.h">
+      <Filter>Scenarios</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GravityScenario.cpp">
-      <Filter>Scenarios</Filter>
-    </ClCompile>
-    <ClCompile Include="Scenario.cpp">
       <Filter>Scenarios</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
@@ -89,9 +90,6 @@
     <ClCompile Include="Cube.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>Utils</Filter>
-    </ClCompile>
     <ClCompile Include="PhysicsHandler.cpp">
       <Filter>Physics</Filter>
     </ClCompile>
@@ -106,6 +104,15 @@
     </ClCompile>
     <ClCompile Include="Logger.cpp">
       <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenarios.cpp">
+      <Filter>Scenarios</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="TestScenario.cpp">
+      <Filter>Scenarios</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -126,5 +133,8 @@
     <None Include="..\x64\Debug\Shaders\lightShading.vert">
       <Filter>Shaders</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="AplicacaoTCC.rc" />
   </ItemGroup>
 </Project>

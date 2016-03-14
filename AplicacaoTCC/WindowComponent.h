@@ -14,7 +14,7 @@ public:
 	WindowComponent();
 	~WindowComponent();
 	
-	bool wantToCalculateFps{ false };
+	bool wantToCalculateFps{ true };
 	float m_maxFps{ 60.0f };
 
 	SDL_Window* getWindow();

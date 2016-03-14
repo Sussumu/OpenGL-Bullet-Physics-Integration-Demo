@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Simulador.h"
 #include "GameObject.h"
 #include "ShaderProgram.h"
 #include <string>
@@ -7,7 +8,6 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include <SOIL/SOIL.h>
 
 class Cube : public GameObject
 {

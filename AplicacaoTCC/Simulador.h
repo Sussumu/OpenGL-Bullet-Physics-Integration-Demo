@@ -2,9 +2,10 @@
 
 #include "Camera.h"
 #include "WindowComponent.h"
-#include "Scenario.h"
 #include "Logger.h"
+#include "Scenarios.h"
 #include "GravityScenario.h"
+#include "TestScenario.h"
 #include <GL/glew.h>
 #include <vector>
 
@@ -18,7 +19,7 @@ public:
 	bool initializeSystems(); 
 	void setupScenario(int option);
 	bool gameLoop();
-	
+
 private:
 
 	enum SimulationState
@@ -28,23 +29,24 @@ private:
 	} m_simulationState;
 
 	// DeltaTime
-	float m_actualTicks = 0, m_deltaTime = 0;
+	int m_actualTicks = 0, m_lastTicks = 0, m_deltaTime = 0;
 	float m_maxFps { 60.0f };
 
 	// Input
 	GLfloat m_lastMouseX = SCREEN_WIDTH/2, m_lastMouseY = SCREEN_HEIGHT/2;
 	bool m_firstMouse = true;
+	bool isKeyDown = false;
 
 	// Componentes
 	WindowComponent* m_window { new WindowComponent() };
-
-	Scenario* m_scenario;
-	Camera* m_camera = new Camera();
+	Scenario* m_scenario { nullptr };
+	Camera* m_camera;
 
 	void updatePhysics();
 	void render();
 	void eventHandler();
-	void keyboardHandler(SDL_Keycode key);
+	//void keyboardHandler(SDL_Keycode key);
+	void keyboardHandler(const Uint8* key);
 	void mouseHandler(double currentMouseX, double currentMouseY);
 	void mouseScrollHandler(double offset);
 	void endProgram();

@@ -117,11 +117,15 @@ void Cube::update()
 	GLint modelLoc = glGetUniformLocation(m_shaderProgram->programID, "model");
 	GLint viewLoc = glGetUniformLocation(m_shaderProgram->programID, "view");
 	GLint projLoc = glGetUniformLocation(m_shaderProgram->programID, "projection");
+
 	GLint objectColorLoc = glGetUniformLocation(m_shaderProgram->programID, "objectColor");
 	GLint lightColorLoc = glGetUniformLocation(m_shaderProgram->programID, "lightColor");
+	GLint lightPosLoc = glGetUniformLocation(m_shaderProgram->programID, "lightPos");
+	GLint viewPosLoc = glGetUniformLocation(m_shaderProgram->programID, "viewPos");
 
 	glUniform3f(objectColorLoc, 1.0f, 0.5f, 0.31f);
 	glUniform3f(lightColorLoc, 1.0f, 0.5f, 1.0f);
+	//glUniform3f(viewPosLoc, Simulador::getCamera()->Position.x, Simulador::getCamera()->Position.y, Simulador::getCamera()->Position.z);  //camera.Position.x, camera.Position.y, camera.Position.z);
 
 	glBindVertexArray(m_VAO);
 	glm::mat4 model;
@@ -131,6 +135,9 @@ void Cube::update()
 	model = glm::rotate(model, roll, glm::vec3(1.0f, 0.0f, 1.0f));
 
 	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+	//glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+	//glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
+
 	glDrawArrays(GL_TRIANGLES, 0, 36);
 
 	glBindVertexArray(0);

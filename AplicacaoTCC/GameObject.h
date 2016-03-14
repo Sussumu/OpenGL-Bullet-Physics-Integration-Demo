@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <glm\glm.hpp>
 #include <Bullet/btBulletDynamicsCommon.h>
 
 class GameObject

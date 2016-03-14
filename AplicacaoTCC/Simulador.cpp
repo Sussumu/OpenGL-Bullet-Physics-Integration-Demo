@@ -3,6 +3,7 @@
 Simulador::Simulador(int option)
 {
 	initializeSystems();
+	m_camera = new Camera(glm::vec3(0.0f, 0.0f, 3.0f));
 	setupScenario(option);
 }
 
@@ -26,18 +27,20 @@ void Simulador::setupScenario(int option)
 	switch (option)
 	{
 	case 1:
-		m_scenario = new GravityScenario();
+		//m_scenario = new GravityScenario();
+		m_scenario = new TestScenario();
 		break;
 	}
-	
 }
 
 // Loop principal do simulador
 bool Simulador::gameLoop()
 {
+	SDL_WarpMouseInWindow(m_window->getWindow(), 400, 300);
 	while (m_simulationState != SimulationState::EXIT)
 	{
 		m_actualTicks = SDL_GetTicks();
+		m_deltaTime = m_actualTicks - m_lastTicks;
 
 		///////////////////////////////////////////////////
 		eventHandler();
@@ -48,7 +51,7 @@ bool Simulador::gameLoop()
 		if (m_window->wantToCalculateFps)
 			m_window->calculateFPS();
 
-		m_deltaTime = SDL_GetTicks() - m_actualTicks;
+		m_lastTicks = SDL_GetTicks();
 
 		// Frame limiter
 		if (1000.0f / m_maxFps > m_deltaTime)
@@ -67,7 +70,7 @@ void Simulador::updatePhysics()
 // Chama o método renderScenario() do scenario
 void Simulador::render()
 {
-	m_scenario->renderScenario();
+	m_scenario->renderScenario(m_camera);
 
 	SDL_GL_SwapWindow(m_window->getWindow());
 }
@@ -85,36 +88,37 @@ void Simulador::eventHandler()
 			m_simulationState = SimulationState::EXIT;
 			break;
 		case SDL_KEYDOWN:
-			keyboardHandler(sdlevent.key.keysym.sym);
+			isKeyDown = true;
+			break;
+		case SDL_KEYUP:
+			isKeyDown = false;
 			break;
 		case SDL_MOUSEMOTION:
-			mouseHandler(sdlevent.motion.x, sdlevent.motion.y);
+			mouseHandler(sdlevent.motion.xrel, sdlevent.motion.yrel);
 			break;
 		case SDL_MOUSEWHEEL:
 			mouseScrollHandler(sdlevent.wheel.y);
 			break;
 		}
 	}
+	if (isKeyDown)
+	{
+		const Uint8* key = SDL_GetKeyboardState(NULL);
+		keyboardHandler(key);
+	}
 }
 
 // Trata o input do teclado
-void Simulador::keyboardHandler(SDL_Keycode key)
+void Simulador::keyboardHandler(const Uint8* key)
 {
-	switch (key)
-	{
-	case SDLK_w:
+	if (key[SDL_SCANCODE_W])
 		m_camera->ProcessKeyboard(FORWARD, m_deltaTime);
-		break;
-	case SDLK_a:
+	if (key[SDL_SCANCODE_A])
 		m_camera->ProcessKeyboard(LEFT, m_deltaTime);
-		break;
-	case SDLK_s:
+	if (key[SDL_SCANCODE_S])
 		m_camera->ProcessKeyboard(BACKWARD, m_deltaTime);
-		break;
-	case SDLK_d:
+	if (key[SDL_SCANCODE_D])
 		m_camera->ProcessKeyboard(RIGHT, m_deltaTime);
-		break;
-	}
 }
 
 // Trata eventos do mouse (recebe a posição atual x,y e calcula as variações)
@@ -127,13 +131,17 @@ void Simulador::mouseHandler(double currentMouseX, double currentMouseY)
 		m_firstMouse = false;
 	}
 
-	GLfloat xoffset = currentMouseX - m_lastMouseX;
-	GLfloat yoffset = m_lastMouseY - currentMouseY;
+	GLfloat xoffset = currentMouseX;
+	GLfloat yoffset = currentMouseY;
 
 	m_lastMouseX = currentMouseX;
 	m_lastMouseY = currentMouseY;
 
-	m_camera->ProcessMouseMovement(xoffset, yoffset);
+	m_camera->ProcessMouseMovement(xoffset, -yoffset);
+	//gotoxy(0, 13);
+	//showMessage("Mouse offset     X " + std::to_string(xoffset));
+	//gotoxy(0, 14);
+	//showMessage("Mouse offset     Y " + std::to_string(yoffset));
 }
 
 // Trata eventos do scroll do mouse
