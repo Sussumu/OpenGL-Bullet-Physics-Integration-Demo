@@ -10,8 +10,8 @@ Ground::Ground(ShaderProgram* shaderProgram, GLfloat* vertices, glm::vec3 positi
 	hasPhysics = enablePhysics;
 	shape = new btStaticPlaneShape(btVector3(0, m_position.y, 0), 1);
 	motionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1),
-		btVector3(btScalar(position.x), btScalar(position.y), btScalar(position.z))));
-	btRigidBody::btRigidBodyConstructionInfo rigidBodyCI(1, motionState, shape, btVector3(0, 0, 0));
+		btVector3(btScalar(m_position.x), btScalar(m_position.y), btScalar(m_position.z))));
+	btRigidBody::btRigidBodyConstructionInfo rigidBodyCI(0, motionState, shape, btVector3(0, 0, 0));
 	rigidBody = new btRigidBody(rigidBodyCI);
 }
 
@@ -21,6 +21,50 @@ Ground::~Ground()
 
 void Ground::setup()
 {
+	GLfloat vertices[] = {
+		-10.0f, -10.0f, -10.0f,   0.0f, 0.0f, -1.0f,
+		 10.0f, -10.0f, -10.0f,   0.0f, 0.0f, -1.0f,
+		 10.0f,  10.0f, -10.0f,   0.0f, 0.0f, -1.0f,
+		 10.0f,  10.0f, -10.0f,   0.0f, 0.0f, -1.0f,
+		-10.0f,  10.0f, -10.0f,   0.0f, 0.0f, -1.0f,
+		-10.0f, -10.0f, -10.0f,   0.0f, 0.0f, -1.0f,
+
+		-10.0f, -10.0f,  10.0f,   0.0f, 0.0f,  1.0f,
+		 10.0f, -10.0f,  10.0f,   0.0f, 0.0f,  1.0f,
+		 10.0f,  10.0f,  10.0f,   0.0f, 0.0f,  1.0f,
+		 10.0f,  10.0f,  10.0f,   0.0f, 0.0f,  1.0f,
+		-10.0f,  10.0f,  10.0f,   0.0f, 0.0f,  1.0f,
+		-10.0f, -10.0f,  10.0f,   0.0f, 0.0f,  1.0f,
+
+		-10.0f,  10.0f,  10.0f,  -1.0f, 0.0f,  0.0f,
+		-10.0f,  10.0f, -10.0f,  -1.0f, 0.0f,  0.0f,
+		-10.0f, -10.0f, -10.0f,  -1.0f, 0.0f,  0.0f,
+		-10.0f, -10.0f, -10.0f,  -1.0f, 0.0f,  0.0f,
+		-10.0f, -10.0f,  10.0f,  -1.0f, 0.0f,  0.0f,
+		-10.0f,  10.0f,  10.0f,  -1.0f, 0.0f,  0.0f,
+
+		 10.0f,  10.0f,  10.0f,   1.0f, 0.0f,  0.0f,
+		 10.0f,  10.0f, -10.0f,   1.0f, 0.0f,  0.0f,
+		 10.0f, -10.0f, -10.0f,   1.0f, 0.0f,  0.0f,
+		 10.0f, -10.0f, -10.0f,   1.0f, 0.0f,  0.0f,
+		 10.0f, -10.0f,  10.0f,   1.0f, 0.0f,  0.0f,
+		 10.0f,  10.0f,  10.0f,   1.0f, 0.0f,  0.0f,
+
+		-10.0f, -10.0f, -10.0f,   0.0f, 1.0f,  0.0f,
+		 10.0f, -10.0f, -10.0f,   0.0f, 1.0f,  0.0f,
+		 10.0f, -10.0f,  10.0f,   0.0f, 1.0f,  0.0f,
+		 10.0f, -10.0f,  10.0f,   0.0f, 1.0f,  0.0f,
+		-10.0f, -10.0f,  10.0f,   0.0f, 1.0f,  0.0f,
+		-10.0f, -10.0f, -10.0f,   0.0f, 1.0f,  0.0f,
+
+		-10.0f,  10.0f, -10.0f,   0.0f, 1.0f,  0.0f,
+		 10.0f,  10.0f, -10.0f,   0.0f, 1.0f,  0.0f,
+		 10.0f,  10.0f,  10.0f,   0.0f, 1.0f,  0.0f,
+		 10.0f,  10.0f,  10.0f,   0.0f, 1.0f,  0.0f,
+		-10.0f,  10.0f,  10.0f,   0.0f, 1.0f,  0.0f,
+		-10.0f,  10.0f, -10.0f,   0.0f, 1.0f,  0.0f
+	};
+
 #pragma region Draw
 	glGenVertexArrays(1, &m_VAO);
 	glGenBuffers(1, &m_VBO);
@@ -28,7 +72,8 @@ void Ground::setup()
 	glBindVertexArray(m_VAO);
 
 	glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(m_vertices), m_vertices, GL_STATIC_DRAW);
+	//glBufferData(GL_ARRAY_BUFFER, sizeof(m_vertices), m_vertices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
 	// Position attribute
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)0);
@@ -44,40 +89,39 @@ void Ground::setup()
 
 void Ground::updatePhysics()
 {
-	btTransform transform;
-	rigidBody->getMotionState()->getWorldTransform(transform);
-
-	m_position.x = transform.getOrigin().getX();
-	m_position.y = transform.getOrigin().getY();
-	m_position.z = transform.getOrigin().getZ();
-
-	transform.getBasis().getEulerYPR(yaw, pitch, roll);
 }
 
-void Ground::update()
+void Ground::update(glm::vec3 viewPosition, glm::mat4 view, glm::mat4 projection)
 {
 	m_shaderProgram->use();
 	
 #pragma region Rendering
-	GLint modelLoc = glGetUniformLocation(m_shaderProgram->programID, "model");
-	GLint viewLoc = glGetUniformLocation(m_shaderProgram->programID, "view");
-	GLint projLoc = glGetUniformLocation(m_shaderProgram->programID, "projection");
 	GLint objectColorLoc = glGetUniformLocation(m_shaderProgram->programID, "objectColor");
 	GLint lightColorLoc = glGetUniformLocation(m_shaderProgram->programID, "lightColor");
+	GLint lightPosLoc = glGetUniformLocation(m_shaderProgram->programID, "lightPos");
+	GLint viewPosLoc = glGetUniformLocation(m_shaderProgram->programID, "viewPos");
 
-	glUniform3f(objectColorLoc, 1.0f, 0.5f, 0.31f);
-	glUniform3f(lightColorLoc, 1.0f, 0.5f, 1.0f);
+	glUniform3f(objectColorLoc, 0.55f, 0.8f, 0.54f);
+	glUniform3f(lightColorLoc, 1.0f, 1.0f, 1.0f);
+	glUniform3f(lightPosLoc, 0.0f, 5.0f, 0.0f);
+	glUniform3f(viewPosLoc, viewPosition.x, viewPosition.y, viewPosition.z);
 
-	glBindVertexArray(m_VAO);
+	GLuint modelLoc = glGetUniformLocation(m_shaderProgram->programID, "model");
+	GLuint viewLoc = glGetUniformLocation(m_shaderProgram->programID, "view");
+	GLuint projLoc = glGetUniformLocation(m_shaderProgram->programID, "projection");
+
 	glm::mat4 model;
 	model = glm::translate(model, m_position);
+	model = glm::scale(model, glm::vec3(1.0f, 0.1f, 1.0f));
 
 	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-	glDrawArrays(GL_TRIANGLES, 0, 36);
+	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+	glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
 
+	glBindVertexArray(m_VAO);
+	glDrawArrays(GL_TRIANGLES, 0, 36);
 	glBindVertexArray(0);
 
-	m_shaderProgram->unuse();
 #pragma endregion
 }
 

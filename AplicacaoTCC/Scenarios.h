@@ -14,11 +14,9 @@ public:
 	std::vector<GameObject*> objectsList;
 
 	virtual void setupScenario();
-	virtual void updatePhysics();
+	virtual void updatePhysics(int deltaTime);
 	virtual void renderScenario(Camera* camera);
 	virtual void cleanScenario();
-
-private:
 
 };
 

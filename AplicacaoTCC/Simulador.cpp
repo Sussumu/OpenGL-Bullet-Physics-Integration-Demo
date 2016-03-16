@@ -27,8 +27,8 @@ void Simulador::setupScenario(int option)
 	switch (option)
 	{
 	case 1:
-		//m_scenario = new GravityScenario();
-		m_scenario = new TestScenario();
+		m_scenario = new GravityScenario();
+		//m_scenario = new TestScenario();
 		break;
 	}
 }
@@ -44,7 +44,7 @@ bool Simulador::gameLoop()
 
 		///////////////////////////////////////////////////
 		eventHandler();
-		updatePhysics();
+		updatePhysics(m_deltaTime);
 		render();
 		///////////////////////////////////////////////////
 
@@ -62,9 +62,9 @@ bool Simulador::gameLoop()
 }
 
 // Atualiza a física em cada gameobject
-void Simulador::updatePhysics()
+void Simulador::updatePhysics(int deltaTime)
 {
-	m_scenario->updatePhysics();
+	m_scenario->updatePhysics(deltaTime);
 }
 
 // Chama o método renderScenario() do scenario
@@ -87,12 +87,6 @@ void Simulador::eventHandler()
 		case SDL_QUIT:
 			m_simulationState = SimulationState::EXIT;
 			break;
-		case SDL_KEYDOWN:
-			isKeyDown = true;
-			break;
-		case SDL_KEYUP:
-			isKeyDown = false;
-			break;
 		case SDL_MOUSEMOTION:
 			mouseHandler(sdlevent.motion.xrel, sdlevent.motion.yrel);
 			break;
@@ -101,11 +95,9 @@ void Simulador::eventHandler()
 			break;
 		}
 	}
-	if (isKeyDown)
-	{
-		const Uint8* key = SDL_GetKeyboardState(NULL);
-		keyboardHandler(key);
-	}
+	// Trata eventos do teclado
+	const Uint8* key = SDL_GetKeyboardState(NULL);
+	keyboardHandler(key);
 }
 
 // Trata o input do teclado
@@ -119,25 +111,14 @@ void Simulador::keyboardHandler(const Uint8* key)
 		m_camera->ProcessKeyboard(BACKWARD, m_deltaTime);
 	if (key[SDL_SCANCODE_D])
 		m_camera->ProcessKeyboard(RIGHT, m_deltaTime);
+	if (key[SDL_SCANCODE_ESCAPE])
+		endProgram();
 }
 
 // Trata eventos do mouse (recebe a posição atual x,y e calcula as variações)
 void Simulador::mouseHandler(double currentMouseX, double currentMouseY)
 {
-	if (m_firstMouse)
-	{
-		m_lastMouseX = currentMouseX;
-		m_lastMouseY = currentMouseY;
-		m_firstMouse = false;
-	}
-
-	GLfloat xoffset = currentMouseX;
-	GLfloat yoffset = currentMouseY;
-
-	m_lastMouseX = currentMouseX;
-	m_lastMouseY = currentMouseY;
-
-	m_camera->ProcessMouseMovement(xoffset, -yoffset);
+	m_camera->ProcessMouseMovement(currentMouseX, -currentMouseY);
 	//gotoxy(0, 13);
 	//showMessage("Mouse offset     X " + std::to_string(xoffset));
 	//gotoxy(0, 14);

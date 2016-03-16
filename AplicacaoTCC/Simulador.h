@@ -34,18 +34,15 @@ private:
 
 	// Input
 	GLfloat m_lastMouseX = SCREEN_WIDTH/2, m_lastMouseY = SCREEN_HEIGHT/2;
-	bool m_firstMouse = true;
-	bool isKeyDown = false;
 
 	// Componentes
 	WindowComponent* m_window { new WindowComponent() };
 	Scenario* m_scenario { nullptr };
 	Camera* m_camera;
 
-	void updatePhysics();
+	void updatePhysics(int deltaTime);
 	void render();
 	void eventHandler();
-	//void keyboardHandler(SDL_Keycode key);
 	void keyboardHandler(const Uint8* key);
 	void mouseHandler(double currentMouseX, double currentMouseY);
 	void mouseScrollHandler(double offset);

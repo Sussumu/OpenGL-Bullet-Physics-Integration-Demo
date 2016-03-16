@@ -33,10 +33,10 @@ private:
 	PhysicsHandler* m_physicsHandler = new PhysicsHandler();
 
 	std::vector<GameObject*> m_objectsList;
-	std::vector<ShaderProgram*> m_shaderPrograms;
 
 	void initShaders();
 	void updateCamera(Camera* camera);
+	void updatePhysics(int deltaTime);
 	void renderScenario(Camera* camera);
 	void setupScenario();
 	void cleanScenario();

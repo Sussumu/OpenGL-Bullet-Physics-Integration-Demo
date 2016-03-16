@@ -16,7 +16,7 @@ void Scenario::setupScenario()
 	}
 }
 
-void Scenario::updatePhysics()
+void Scenario::updatePhysics(int deltaTime)
 {
 	for each (GameObject* gameObject in objectsList)
 	{
@@ -24,12 +24,13 @@ void Scenario::updatePhysics()
 	}
 }
 
+//void Scenario::renderScenario(Camera* camera)
 void Scenario::renderScenario(Camera* camera)
 {
-	for each (GameObject* gameObject in objectsList)
-	{
-		gameObject->update();
-	}
+	//for each (GameObject* gameObject in objectsList)
+	//{
+	//	gameObject->update();
+	//}
 }
 
 void Scenario::cleanScenario()

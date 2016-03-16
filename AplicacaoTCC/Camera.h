@@ -18,8 +18,8 @@ enum Camera_Movement {
 
 const GLfloat YAW = -90.0f;
 const GLfloat PITCH = 0.0f;
-const GLfloat SPEED = 0.3f;
-const GLfloat SENSITIVITY = 0.25f;
+const GLfloat SPEED = 0.01f;
+const GLfloat SENSITIVITY = 0.2f;
 const GLfloat ZOOM = 45.0f;
 
 class Camera

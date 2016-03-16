@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Camera.h"
 #include "Simulador.h"
 #include "GameObject.h"
 #include "ShaderProgram.h"
@@ -19,7 +20,8 @@ public:
 
 	void setup();
 	void updatePhysics();
-	void update();
+	void update(glm::vec3 viewPosition, glm::mat4 view, glm::mat4 projection);
+	//void update(Camera* camera);
 	void clean();
 
 	btRigidBody* getRigidBody();
@@ -29,8 +31,6 @@ private:
 	GLfloat* m_vertices;
 	glm::vec3 m_position;
 	glm::vec3 m_rotation;
-	//GLuint m_texture1;
-	//GLuint m_texture2;
 	GLuint m_VBO, m_VAO;
 
 	float m_mass;

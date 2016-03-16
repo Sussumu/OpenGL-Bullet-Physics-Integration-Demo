@@ -11,7 +11,7 @@ public:
 	~PhysicsHandler();
 
 	void setupRigidBodies(std::vector<GameObject*> gameObjectsList);
-	void stepSimulation();
+	void stepSimulation(int deltaTime);
 	void cleanRigidBodies(std::vector<GameObject*> gameObjectsList);
 
 private:

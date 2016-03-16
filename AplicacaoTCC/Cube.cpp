@@ -11,8 +11,8 @@ Cube::Cube(ShaderProgram* shaderProgram, GLfloat* vertices, glm::vec3 position, 
 	hasPhysics = enablePhysics;
 	shape = new btBoxShape(btVector3(1, 1, 1));
 	motionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1),
-				   btVector3(btScalar(position.x), btScalar(position.y), btScalar(position.z))));
-	shape->calculateLocalInertia(mass, m_inertia);
+				   btVector3(btScalar(m_position.x), btScalar(m_position.y), btScalar(m_position.z))));
+	shape->calculateLocalInertia(m_mass, m_inertia);
 	btRigidBody::btRigidBodyConstructionInfo rigidBodyCI(1, motionState, shape, m_inertia);
 	rigidBody = new btRigidBody(rigidBodyCI);
 }
@@ -23,28 +23,65 @@ Cube::~Cube()
 
 void Cube::setup()
 {
+	GLfloat vertices2[] = {
+		-0.5f, -0.5f, -0.5f,   0.0f, 0.0f,  -1.0f,
+		0.5f, -0.5f, -0.5f,   0.0f, 0.0f,  -1.0f,
+		0.5f,  0.5f, -0.5f,   0.0f, 0.0f,  -1.0f,
+		0.5f,  0.5f, -0.5f,   0.0f, 0.0f,  -1.0f,
+		-0.5f,  0.5f, -0.5f,   0.0f, 0.0f,  -1.0f,
+		-0.5f, -0.5f, -0.5f,   0.0f, 0.0f,  -1.0f,
+
+		-0.5f, -0.5f,  0.5f,   0.0f, 0.0f,   1.0f,
+		0.5f, -0.5f,  0.5f,   0.0f, 0.0f,   1.0f,
+		0.5f,  0.5f,  0.5f,   0.0f, 0.0f,   1.0f,
+		0.5f,  0.5f,  0.5f,   0.0f, 0.0f,   1.0f,
+		-0.5f,  0.5f,  0.5f,   0.0f, 0.0f,   1.0f,
+		-0.5f, -0.5f,  0.5f,   0.0f, 0.0f,   1.0f,
+
+		-0.5f,  0.5f,  0.5f, -1.0f, 0.0f,   0.0f,
+		-0.5f,  0.5f, -0.5f, -1.0f, 0.0f,   0.0f,
+		-0.5f, -0.5f, -0.5f, -1.0f, 0.0f,   0.0f,
+		-0.5f, -0.5f, -0.5f, -1.0f, 0.0f,   0.0f,
+		-0.5f, -0.5f,  0.5f, -1.0f, 0.0f,   0.0f,
+		-0.5f,  0.5f,  0.5f, -1.0f, 0.0f,   0.0f,
+
+		0.5f,  0.5f,  0.5f,   1.0f, 0.0f,   0.0f,
+		0.5f,  0.5f, -0.5f,   1.0f, 0.0f,   0.0f,
+		0.5f, -0.5f, -0.5f,   1.0f, 0.0f,   0.0f,
+		0.5f, -0.5f, -0.5f,   1.0f, 0.0f,   0.0f,
+		0.5f, -0.5f,  0.5f,   1.0f, 0.0f,   0.0f,
+		0.5f,  0.5f,  0.5f,   1.0f, 0.0f,   0.0f,
+
+		-0.5f, -0.5f, -0.5f,   0.0f, 1.0f,   0.0f,
+		0.5f, -0.5f, -0.5f,   0.0f, 1.0f,   0.0f,
+		0.5f, -0.5f,  0.5f,   0.0f, 1.0f,   0.0f,
+		0.5f, -0.5f,  0.5f,   0.0f, 1.0f,   0.0f,
+		-0.5f, -0.5f,  0.5f,   0.0f, 1.0f,   0.0f,
+		-0.5f, -0.5f, -0.5f,   0.0f, 1.0f,   0.0f,
+
+		-0.5f,  0.5f, -0.5f,   0.0f, 1.0f,   0.0f,
+		0.5f,  0.5f, -0.5f,   0.0f, 1.0f,   0.0f,
+		0.5f,  0.5f,  0.5f,   0.0f, 1.0f,   0.0f,
+		0.5f,  0.5f,  0.5f,   0.0f, 1.0f,   0.0f,
+		-0.5f,  0.5f,  0.5f,   0.0f, 1.0f,   0.0f,
+		-0.5f,  0.5f, -0.5f,   0.0f, 1.0f,   0.0f
+	};
+
 #pragma region Draw
 	glGenVertexArrays(1, &m_VAO);
 	glGenBuffers(1, &m_VBO);
 
 	glBindVertexArray(m_VAO);
-
 	glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(m_vertices), m_vertices, GL_STATIC_DRAW);
+	//glBufferData(GL_ARRAY_BUFFER, sizeof(m_vertices), m_vertices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices2), vertices2, GL_STATIC_DRAW);
 
-	// Position attribute
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)0);
 	glEnableVertexAttribArray(0);
 
-	// Normal attribute
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
 	glEnableVertexAttribArray(1);
-
-	// TexCoord attribute
-	//glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
-	//glEnableVertexAttribArray(2);
-
-	glBindVertexArray(0); // Unbind VAO
+	glBindVertexArray(0);
 #pragma endregion
 
 #pragma region Texture
@@ -99,7 +136,8 @@ void Cube::updatePhysics()
 	transform.getBasis().getEulerYPR(yaw, pitch, roll);
 }
 
-void Cube::update()
+void Cube::update(glm::vec3 viewPosition, glm::mat4 view, glm::mat4 projection)
+//void Cube::update(Camera* camera)
 {
 	m_shaderProgram->use();
 
@@ -114,35 +152,35 @@ void Cube::update()
 #pragma endregion
 
 #pragma region Rendering
-	GLint modelLoc = glGetUniformLocation(m_shaderProgram->programID, "model");
-	GLint viewLoc = glGetUniformLocation(m_shaderProgram->programID, "view");
-	GLint projLoc = glGetUniformLocation(m_shaderProgram->programID, "projection");
-
 	GLint objectColorLoc = glGetUniformLocation(m_shaderProgram->programID, "objectColor");
 	GLint lightColorLoc = glGetUniformLocation(m_shaderProgram->programID, "lightColor");
 	GLint lightPosLoc = glGetUniformLocation(m_shaderProgram->programID, "lightPos");
 	GLint viewPosLoc = glGetUniformLocation(m_shaderProgram->programID, "viewPos");
-
+	// Seta as variáveis
 	glUniform3f(objectColorLoc, 1.0f, 0.5f, 0.31f);
-	glUniform3f(lightColorLoc, 1.0f, 0.5f, 1.0f);
-	//glUniform3f(viewPosLoc, Simulador::getCamera()->Position.x, Simulador::getCamera()->Position.y, Simulador::getCamera()->Position.z);  //camera.Position.x, camera.Position.y, camera.Position.z);
+	glUniform3f(lightColorLoc, 1.0f, 1.0f, 1.0f);
+	glUniform3f(lightPosLoc, 1.2f, 1.0f, 2.0f);
+	glUniform3f(viewPosLoc, viewPosition.x, viewPosition.y, viewPosition.z);
 
-	glBindVertexArray(m_VAO);
+	GLuint modelLoc = glGetUniformLocation(m_shaderProgram->programID, "model");
+	GLuint viewLoc = glGetUniformLocation(m_shaderProgram->programID, "view");
+	GLuint projLoc = glGetUniformLocation(m_shaderProgram->programID, "projection");
+	
 	glm::mat4 model;
 	model = glm::translate(model, m_position);
+	
 	model = glm::rotate(model, yaw, glm::vec3(1.0f, 0.0f, 0.0f));
 	model = glm::rotate(model, pitch, glm::vec3(0.0f, 1.0f, 0.0f));
 	model = glm::rotate(model, roll, glm::vec3(1.0f, 0.0f, 1.0f));
-
+	
 	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-	//glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
-	//glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
+	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+	glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
 
+	glBindVertexArray(m_VAO);
 	glDrawArrays(GL_TRIANGLES, 0, 36);
-
 	glBindVertexArray(0);
 
-	m_shaderProgram->unuse();
 #pragma endregion
 }
 

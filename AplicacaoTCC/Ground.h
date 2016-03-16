@@ -18,7 +18,7 @@ public:
 
 	void setup();
 	void updatePhysics();
-	void update();
+	void update(glm::vec3 viewPosition, glm::mat4 view, glm::mat4 projection);
 	void clean();
 
 	btRigidBody* getRigidBody();

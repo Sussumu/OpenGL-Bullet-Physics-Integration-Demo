@@ -31,9 +31,10 @@ void PhysicsHandler::setupRigidBodies(std::vector<GameObject*> gameObjectsList)
 	}
 }
 
-void PhysicsHandler::stepSimulation()
+void PhysicsHandler::stepSimulation(int deltaTime)
 {
-	dynamicsWorld->stepSimulation(1 / 60.0f, 10);
+	//dynamicsWorld->stepSimulation(1 / 60.0f, 10);
+	dynamicsWorld->stepSimulation((float)deltaTime/1000.0f, 10);
 }
 
 void PhysicsHandler::cleanRigidBodies(std::vector<GameObject*> gameObjectsList)

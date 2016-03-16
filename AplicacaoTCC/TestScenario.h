@@ -2,12 +2,7 @@
 
 #include "Scenarios.h"
 #include "Logger.h"
-#include "GameObject.h"
 #include "Camera.h"
-//#include "Cube.h"
-//#include "Ground.h"
-//#include "DiffuseIluminationSource.h"
-//#include "PhysicsHandler.h"
 #include "ShaderProgram.h"
 #include "WindowComponent.h"
 
@@ -27,15 +22,9 @@ public:
 
 private:
 
-	//GameObject* cube{ nullptr };
-	//GameObject* diffuseSource{ nullptr };
-	//GameObject* ground{ nullptr };
 	ShaderProgram* m_shaderProgram = new ShaderProgram();
 	ShaderProgram* m_lightShaderProgram = new ShaderProgram();
 
-	//PhysicsHandler* m_physicsHandler = new PhysicsHandler();
-
-	//std::vector<GameObject*> m_objectsList;
 	std::vector<ShaderProgram*> m_shaderPrograms;
 
 	GLuint VBO, containerVAO, lightVAO;
