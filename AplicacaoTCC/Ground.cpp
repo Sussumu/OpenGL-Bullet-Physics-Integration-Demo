@@ -91,19 +91,23 @@ void Ground::updatePhysics()
 {
 }
 
-void Ground::update(glm::vec3 viewPosition, glm::mat4 view, glm::mat4 projection)
+void Ground::update(glm::vec3 viewPosition, glm::mat4 view, glm::mat4 projection, LightCaster* lightCaster)
 {
 	m_shaderProgram->use();
 	
 #pragma region Rendering
 	GLint objectColorLoc = glGetUniformLocation(m_shaderProgram->programID, "objectColor");
-	GLint lightColorLoc = glGetUniformLocation(m_shaderProgram->programID, "lightColor");
-	GLint lightPosLoc = glGetUniformLocation(m_shaderProgram->programID, "lightPos");
+	GLint lightAmbient = glGetUniformLocation(m_shaderProgram->programID, "light.ambient");
+	GLint lightDiffuse = glGetUniformLocation(m_shaderProgram->programID, "light.diffuse");
+	GLint lightSpecular = glGetUniformLocation(m_shaderProgram->programID, "light.specular");
+	GLint lightDirection = glGetUniformLocation(m_shaderProgram->programID, "light.direction");
 	GLint viewPosLoc = glGetUniformLocation(m_shaderProgram->programID, "viewPos");
 
 	glUniform3f(objectColorLoc, 0.55f, 0.8f, 0.54f);
-	glUniform3f(lightColorLoc, 1.0f, 1.0f, 1.0f);
-	glUniform3f(lightPosLoc, 0.0f, 5.0f, 0.0f);
+	glUniform3f(lightAmbient, lightCaster->getAmbient().x, lightCaster->getAmbient().y, lightCaster->getAmbient().z);
+	glUniform3f(lightDiffuse, lightCaster->getDiffuse().x, lightCaster->getDiffuse().y, lightCaster->getDiffuse().z);
+	glUniform3f(lightSpecular, lightCaster->getSpecular().x, lightCaster->getSpecular().y, lightCaster->getSpecular().z);
+	glUniform3f(lightDirection, lightCaster->getDirection().x, lightCaster->getDirection().y, lightCaster->getDirection().z);
 	glUniform3f(viewPosLoc, viewPosition.x, viewPosition.y, viewPosition.z);
 
 	GLuint modelLoc = glGetUniformLocation(m_shaderProgram->programID, "model");
@@ -112,7 +116,7 @@ void Ground::update(glm::vec3 viewPosition, glm::mat4 view, glm::mat4 projection
 
 	glm::mat4 model;
 	model = glm::translate(model, m_position);
-	model = glm::scale(model, glm::vec3(1.0f, 0.1f, 1.0f));
+	model = glm::scale(model, glm::vec3(1.0f, 0.06f, 1.0f));
 
 	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));

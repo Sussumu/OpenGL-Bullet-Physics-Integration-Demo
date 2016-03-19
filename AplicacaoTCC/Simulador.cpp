@@ -36,7 +36,7 @@ void Simulador::setupScenario(int option)
 // Loop principal do simulador
 bool Simulador::gameLoop()
 {
-	SDL_WarpMouseInWindow(m_window->getWindow(), 400, 300);
+	//SDL_WarpMouseInWindow(m_window->getWindow(), 400, 300);
 	while (m_simulationState != SimulationState::EXIT)
 	{
 		m_actualTicks = SDL_GetTicks();

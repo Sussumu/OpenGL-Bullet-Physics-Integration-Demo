@@ -20,7 +20,7 @@ public:
 
 	void setup();
 	void updatePhysics();
-	void update(glm::vec3 viewPosition, glm::mat4 view, glm::mat4 projection);
+	void update(glm::vec3 viewPosition, glm::mat4 view, glm::mat4 projection, LightCaster* lightCaster);
 	//void update(Camera* camera);
 	void clean();
 

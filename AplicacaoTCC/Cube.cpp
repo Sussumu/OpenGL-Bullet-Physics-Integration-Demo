@@ -12,7 +12,6 @@ Cube::Cube(ShaderProgram* shaderProgram, GLfloat* vertices, glm::vec3 position, 
 	shape = new btBoxShape(btVector3(1, 1, 1));
 	motionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1),
 				   btVector3(btScalar(m_position.x), btScalar(m_position.y), btScalar(m_position.z))));
-	shape->calculateLocalInertia(m_mass, m_inertia);
 	btRigidBody::btRigidBodyConstructionInfo rigidBodyCI(1, motionState, shape, m_inertia);
 	rigidBody = new btRigidBody(rigidBodyCI);
 }
@@ -24,47 +23,47 @@ Cube::~Cube()
 void Cube::setup()
 {
 	GLfloat vertices2[] = {
-		-0.5f, -0.5f, -0.5f,   0.0f, 0.0f,  -1.0f,
-		0.5f, -0.5f, -0.5f,   0.0f, 0.0f,  -1.0f,
-		0.5f,  0.5f, -0.5f,   0.0f, 0.0f,  -1.0f,
-		0.5f,  0.5f, -0.5f,   0.0f, 0.0f,  -1.0f,
-		-0.5f,  0.5f, -0.5f,   0.0f, 0.0f,  -1.0f,
-		-0.5f, -0.5f, -0.5f,   0.0f, 0.0f,  -1.0f,
+		-0.5f, -0.5f, -0.5f,   0.0f,  0.0f, -1.0f,
+		 0.5f, -0.5f, -0.5f,   0.0f,  0.0f, -1.0f,
+		 0.5f,  0.5f, -0.5f,   0.0f,  0.0f, -1.0f,
+		 0.5f,  0.5f, -0.5f,   0.0f,  0.0f, -1.0f,
+		-0.5f,  0.5f, -0.5f,   0.0f,  0.0f, -1.0f,
+		-0.5f, -0.5f, -0.5f,   0.0f,  0.0f, -1.0f,
 
-		-0.5f, -0.5f,  0.5f,   0.0f, 0.0f,   1.0f,
-		0.5f, -0.5f,  0.5f,   0.0f, 0.0f,   1.0f,
-		0.5f,  0.5f,  0.5f,   0.0f, 0.0f,   1.0f,
-		0.5f,  0.5f,  0.5f,   0.0f, 0.0f,   1.0f,
-		-0.5f,  0.5f,  0.5f,   0.0f, 0.0f,   1.0f,
-		-0.5f, -0.5f,  0.5f,   0.0f, 0.0f,   1.0f,
+		-0.5f, -0.5f,  0.5f,   0.0f,  0.0f,  1.0f,
+		 0.5f, -0.5f,  0.5f,   0.0f,  0.0f,  1.0f,
+		 0.5f,  0.5f,  0.5f,   0.0f,  0.0f,  1.0f,
+		 0.5f,  0.5f,  0.5f,   0.0f,  0.0f,  1.0f,
+		-0.5f,  0.5f,  0.5f,   0.0f,  0.0f,  1.0f,
+		-0.5f, -0.5f,  0.5f,   0.0f,  0.0f,  1.0f,
 
-		-0.5f,  0.5f,  0.5f, -1.0f, 0.0f,   0.0f,
-		-0.5f,  0.5f, -0.5f, -1.0f, 0.0f,   0.0f,
-		-0.5f, -0.5f, -0.5f, -1.0f, 0.0f,   0.0f,
-		-0.5f, -0.5f, -0.5f, -1.0f, 0.0f,   0.0f,
-		-0.5f, -0.5f,  0.5f, -1.0f, 0.0f,   0.0f,
-		-0.5f,  0.5f,  0.5f, -1.0f, 0.0f,   0.0f,
+		-0.5f,  0.5f,  0.5f,  -1.0f,  0.0f,  0.0f,
+		-0.5f,  0.5f, -0.5f,  -1.0f,  0.0f,  0.0f,
+		-0.5f, -0.5f, -0.5f,  -1.0f,  0.0f,  0.0f,
+		-0.5f, -0.5f, -0.5f,  -1.0f,  0.0f,  0.0f,
+		-0.5f, -0.5f,  0.5f,  -1.0f,  0.0f,  0.0f,
+		-0.5f,  0.5f,  0.5f,  -1.0f,  0.0f,  0.0f,
 
-		0.5f,  0.5f,  0.5f,   1.0f, 0.0f,   0.0f,
-		0.5f,  0.5f, -0.5f,   1.0f, 0.0f,   0.0f,
-		0.5f, -0.5f, -0.5f,   1.0f, 0.0f,   0.0f,
-		0.5f, -0.5f, -0.5f,   1.0f, 0.0f,   0.0f,
-		0.5f, -0.5f,  0.5f,   1.0f, 0.0f,   0.0f,
-		0.5f,  0.5f,  0.5f,   1.0f, 0.0f,   0.0f,
+		 0.5f,  0.5f,  0.5f,   1.0f,  0.0f,  0.0f,
+		 0.5f,  0.5f, -0.5f,   1.0f,  0.0f,  0.0f,
+		 0.5f, -0.5f, -0.5f,   1.0f,  0.0f,  0.0f,
+		 0.5f, -0.5f, -0.5f,   1.0f,  0.0f,  0.0f,
+		 0.5f, -0.5f,  0.5f,   1.0f,  0.0f,  0.0f,
+		 0.5f,  0.5f,  0.5f,   1.0f,  0.0f,  0.0f,
 
-		-0.5f, -0.5f, -0.5f,   0.0f, 1.0f,   0.0f,
-		0.5f, -0.5f, -0.5f,   0.0f, 1.0f,   0.0f,
-		0.5f, -0.5f,  0.5f,   0.0f, 1.0f,   0.0f,
-		0.5f, -0.5f,  0.5f,   0.0f, 1.0f,   0.0f,
-		-0.5f, -0.5f,  0.5f,   0.0f, 1.0f,   0.0f,
-		-0.5f, -0.5f, -0.5f,   0.0f, 1.0f,   0.0f,
+		-0.5f, -0.5f, -0.5f,   0.0f,  1.0f,  0.0f,
+		 0.5f, -0.5f, -0.5f,   0.0f,  1.0f,  0.0f,
+		 0.5f, -0.5f,  0.5f,   0.0f,  1.0f,  0.0f,
+		 0.5f, -0.5f,  0.5f,   0.0f,  1.0f,  0.0f,
+		-0.5f, -0.5f,  0.5f,   0.0f,  1.0f,  0.0f,
+		-0.5f, -0.5f, -0.5f,   0.0f,  1.0f,  0.0f,
 
-		-0.5f,  0.5f, -0.5f,   0.0f, 1.0f,   0.0f,
-		0.5f,  0.5f, -0.5f,   0.0f, 1.0f,   0.0f,
-		0.5f,  0.5f,  0.5f,   0.0f, 1.0f,   0.0f,
-		0.5f,  0.5f,  0.5f,   0.0f, 1.0f,   0.0f,
-		-0.5f,  0.5f,  0.5f,   0.0f, 1.0f,   0.0f,
-		-0.5f,  0.5f, -0.5f,   0.0f, 1.0f,   0.0f
+		-0.5f,  0.5f, -0.5f,   0.0f,  1.0f,  0.0f,
+		 0.5f,  0.5f, -0.5f,   0.0f,  1.0f,  0.0f,
+		 0.5f,  0.5f,  0.5f,   0.0f,  1.0f,  0.0f,
+		 0.5f,  0.5f,  0.5f,   0.0f,  1.0f,  0.0f,
+		-0.5f,  0.5f,  0.5f,   0.0f,  1.0f,  0.0f,
+		-0.5f,  0.5f, -0.5f,   0.0f,  1.0f,  0.0f
 	};
 
 #pragma region Draw
@@ -136,7 +135,7 @@ void Cube::updatePhysics()
 	transform.getBasis().getEulerYPR(yaw, pitch, roll);
 }
 
-void Cube::update(glm::vec3 viewPosition, glm::mat4 view, glm::mat4 projection)
+void Cube::update(glm::vec3 viewPosition, glm::mat4 view, glm::mat4 projection, LightCaster* lightCaster)
 //void Cube::update(Camera* camera)
 {
 	m_shaderProgram->use();
@@ -153,13 +152,17 @@ void Cube::update(glm::vec3 viewPosition, glm::mat4 view, glm::mat4 projection)
 
 #pragma region Rendering
 	GLint objectColorLoc = glGetUniformLocation(m_shaderProgram->programID, "objectColor");
-	GLint lightColorLoc = glGetUniformLocation(m_shaderProgram->programID, "lightColor");
-	GLint lightPosLoc = glGetUniformLocation(m_shaderProgram->programID, "lightPos");
+	GLint lightAmbient = glGetUniformLocation(m_shaderProgram->programID, "light.ambient");
+	GLint lightDiffuse = glGetUniformLocation(m_shaderProgram->programID, "light.diffuse");
+	GLint lightSpecular = glGetUniformLocation(m_shaderProgram->programID, "light.specular");
+	GLint lightDirection = glGetUniformLocation(m_shaderProgram->programID, "light.direction");
 	GLint viewPosLoc = glGetUniformLocation(m_shaderProgram->programID, "viewPos");
-	// Seta as variáveis
+
 	glUniform3f(objectColorLoc, 1.0f, 0.5f, 0.31f);
-	glUniform3f(lightColorLoc, 1.0f, 1.0f, 1.0f);
-	glUniform3f(lightPosLoc, 1.2f, 1.0f, 2.0f);
+	glUniform3f(lightAmbient, lightCaster->getAmbient().x, lightCaster->getAmbient().y, lightCaster->getAmbient().z);
+	glUniform3f(lightDiffuse, lightCaster->getDiffuse().x, lightCaster->getDiffuse().y, lightCaster->getDiffuse().z);
+	glUniform3f(lightSpecular, lightCaster->getSpecular().x, lightCaster->getSpecular().y, lightCaster->getSpecular().z);
+	glUniform3f(lightDirection, lightCaster->getDirection().x, lightCaster->getDirection().y, lightCaster->getDirection().z);
 	glUniform3f(viewPosLoc, viewPosition.x, viewPosition.y, viewPosition.z);
 
 	GLuint modelLoc = glGetUniformLocation(m_shaderProgram->programID, "model");

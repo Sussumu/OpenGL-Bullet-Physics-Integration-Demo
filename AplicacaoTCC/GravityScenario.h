@@ -6,7 +6,7 @@
 #include "Camera.h"
 #include "Cube.h"
 #include "Ground.h"
-#include "DiffuseIluminationSource.h"
+#include "DirectionalLight.h"
 #include "PhysicsHandler.h"
 #include "ShaderProgram.h"
 #include "WindowComponent.h"
@@ -25,6 +25,7 @@ private:
 	GameObject* cube { nullptr };
 	GameObject* diffuseSource { nullptr };
 	GameObject* ground { nullptr };
+	LightCaster* directionalLight{ nullptr };
 	ShaderProgram* m_shaderProgram = new ShaderProgram();
 	ShaderProgram* m_lightShaderProgram = new ShaderProgram();
 

@@ -14,9 +14,6 @@ void GravityScenario::initShaders()
 {
 	m_shaderProgram->compileShaders("Shaders/colorShading.vert", "Shaders/colorShading.frag");
 	m_shaderProgram->linkShaders();
-	
-	m_lightShaderProgram->compileShaders("Shaders/lightShading.vert", "Shaders/lightShading.frag");
-	m_lightShaderProgram->linkShaders();
 }
 
 void GravityScenario::setupScenario()
@@ -65,7 +62,7 @@ void GravityScenario::setupScenario()
 		-10.0f,  10.0f,  10.0f,   0.0f, 1.0f,  0.0f,
 		-10.0f,  10.0f, -10.0f,   0.0f, 1.0f,  0.0f
 	};
-	ground = new Ground(m_shaderProgram, vertices, glm::vec3(0, 0, 0), false);
+	ground = new Ground(m_shaderProgram, vertices, glm::vec3(0, -5, 0), false);
 	m_objectsList.push_back(ground);
 
 	// Cubo
@@ -115,13 +112,16 @@ void GravityScenario::setupScenario()
 	cube = new Cube(m_shaderProgram, vertices2, glm::vec3(0, 30, 0), 1.0f, true);
 	m_objectsList.push_back(cube);
 
-	cube = new Cube(m_shaderProgram, vertices2, glm::vec3(0, -10, 0), 0.0f, false);
+	cube = new Cube(m_shaderProgram, vertices2, glm::vec3(0, -3, 0), 0.0f, false);
 	m_objectsList.push_back(cube);
-	
-	// Iluminação
-	//diffuseSource = new DiffuseIluminationSource(m_shaderPrograms, vertices2, glm::vec3(2, 9, 2), false);
-	//m_objectsList.push_back(diffuseSource);
 
+	// Directional light
+	glm::vec3 ambient(0.8f, 0.8f, 0.8f);
+	glm::vec3 diffuse(0.5f, 0.5f, 0.5f);
+	glm::vec3 specular(1.0f);
+	glm::vec3 direction(-30.0f, -40.0f, -20.0f);
+	directionalLight = new DirectionalLight(ambient, diffuse, specular, direction);
+	
 	for each (GameObject* gameObject in m_objectsList)
 	{
 		gameObject->setup();
@@ -154,7 +154,7 @@ void GravityScenario::renderScenario(Camera* camera)
 	for each (GameObject* gameObject in m_objectsList)
 	{
 		// Cada objeto precisa da posição da câmera e das matrizes view e projection para serem desenhados
-		gameObject->update(camera->Position, view, projection);
+		gameObject->update(camera->Position, view, projection, directionalLight);
 	}
 
 	updateCamera(camera);

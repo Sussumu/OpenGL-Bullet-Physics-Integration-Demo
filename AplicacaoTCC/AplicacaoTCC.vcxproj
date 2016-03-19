@@ -136,7 +136,8 @@
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Cube.h" />
-    <ClInclude Include="DiffuseIluminationSource.h" />
+    <ClInclude Include="DirectionalLight.h" />
+    <ClInclude Include="LightCaster.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GravityScenario.h" />
@@ -153,7 +154,8 @@
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Cube.cpp" />
-    <ClCompile Include="DiffuseIluminationSource.cpp" />
+    <ClCompile Include="DirectionalLight.cpp" />
+    <ClCompile Include="LightCaster.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GravityScenario.cpp" />
