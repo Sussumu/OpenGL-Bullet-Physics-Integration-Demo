@@ -11,7 +11,7 @@
 class Ground : public GameObject
 {
 public:
-	Ground(ShaderProgram* shaderProgram, GLfloat* vertices, glm::vec3 position, bool enablePhysics);
+	Ground(ShaderProgram* shaderProgram, GLfloat size, glm::vec3 position, bool enablePhysics);
 	~Ground();
 
 	const std::string name{ "Ground" };
@@ -25,7 +25,7 @@ public:
 
 private:
 	ShaderProgram* m_shaderProgram;
-	GLfloat* m_vertices;
+	GLfloat m_side;
 	glm::vec3 m_position;
 	glm::vec3 m_rotation;
 	GLuint m_VBO, m_VAO;

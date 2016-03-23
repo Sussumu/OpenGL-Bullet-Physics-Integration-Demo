@@ -3,7 +3,7 @@
 Simulador::Simulador(int option)
 {
 	initializeSystems();
-	m_camera = new Camera(glm::vec3(0.0f, 0.0f, 3.0f));
+	m_camera = new Camera(glm::vec3(0.0f, 0.0f, 25.0f));
 	setupScenario(option);
 }
 
@@ -36,26 +36,29 @@ void Simulador::setupScenario(int option)
 // Loop principal do simulador
 bool Simulador::gameLoop()
 {
-	//SDL_WarpMouseInWindow(m_window->getWindow(), 400, 300);
+	m_deltaTime = 1;
 	while (m_simulationState != SimulationState::EXIT)
 	{
-		m_actualTicks = SDL_GetTicks();
-		m_deltaTime = m_actualTicks - m_lastTicks;
-
+		m_lastTicks = SDL_GetTicks();
+		
 		///////////////////////////////////////////////////
-		eventHandler();
 		updatePhysics(m_deltaTime);
+		eventHandler();
 		render();
 		///////////////////////////////////////////////////
 
 		if (m_window->wantToCalculateFps)
 			m_window->calculateFPS();
 
-		m_lastTicks = SDL_GetTicks();
+		m_actualTicks = SDL_GetTicks();
+		m_deltaTime = m_actualTicks - m_lastTicks;
+
+		//gotoxy(0, 8);
+		//showMessage("Delta Time: " + std::to_string(m_deltaTime) + " ms");
 
 		// Frame limiter
-		if (1000.0f / m_maxFps > m_deltaTime)
-			SDL_Delay(1000.0f / m_maxFps - m_deltaTime);
+		//if (1000.0f / m_maxFps > m_deltaTime)
+		//	SDL_Delay(1000.0f / m_maxFps - m_deltaTime);
 	}
 
 	return true;
@@ -111,8 +114,6 @@ void Simulador::keyboardHandler(const Uint8* key)
 		m_camera->ProcessKeyboard(BACKWARD, m_deltaTime);
 	if (key[SDL_SCANCODE_D])
 		m_camera->ProcessKeyboard(RIGHT, m_deltaTime);
-	if (key[SDL_SCANCODE_ESCAPE])
-		endProgram();
 }
 
 // Trata eventos do mouse (recebe a posição atual x,y e calcula as variações)

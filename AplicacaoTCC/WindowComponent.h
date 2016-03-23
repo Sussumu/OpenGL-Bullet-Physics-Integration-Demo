@@ -25,7 +25,7 @@ public:
 private:
 
 	SDL_Window* m_window{ nullptr };
-	bool m_vsync{ false };
+	bool m_vsync{ true };
 
 	float m_fps{ 0 };
 	float m_frameTime{ 0 };

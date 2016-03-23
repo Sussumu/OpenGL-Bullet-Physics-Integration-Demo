@@ -10,18 +10,18 @@ Scenario::~Scenario()
 
 void Scenario::setupScenario()
 {
-	for each (GameObject* gameObject in objectsList)
-	{
-		gameObject->setup();
-	}
+	//for each (GameObject* gameObject in objectsList)
+	//{
+	//	gameObject->setup();
+	//}
 }
 
-void Scenario::updatePhysics(int deltaTime)
+void Scenario::updatePhysics(float deltaTime)
 {
-	for each (GameObject* gameObject in objectsList)
-	{
-		gameObject->updatePhysics();
-	}
+	//for each (GameObject* gameObject in objectsList)
+	//{
+	//	gameObject->updatePhysics();
+	//}
 }
 
 //void Scenario::renderScenario(Camera* camera)
@@ -35,8 +35,8 @@ void Scenario::renderScenario(Camera* camera)
 
 void Scenario::cleanScenario()
 {
-	for each (GameObject* gameObject in objectsList)
-	{
-		gameObject->clean();
-	}
+	//for each (GameObject* gameObject in objectsList)
+	//{
+	//	gameObject->clean();
+	//}
 }

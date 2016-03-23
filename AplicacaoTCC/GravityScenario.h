@@ -13,6 +13,7 @@
 #include <glm/glm.hpp>
 #include <GL/glew.h>
 #include <vector>
+#include <math.h>
 
 class GravityScenario : public Scenario
 {
@@ -37,7 +38,7 @@ private:
 
 	void initShaders();
 	void updateCamera(Camera* camera);
-	void updatePhysics(int deltaTime);
+	void updatePhysics(float deltaTime);
 	void renderScenario(Camera* camera);
 	void setupScenario();
 	void cleanScenario();

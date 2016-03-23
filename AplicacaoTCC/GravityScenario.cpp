@@ -18,102 +18,16 @@ void GravityScenario::initShaders()
 
 void GravityScenario::setupScenario()
 {
-	// Ground
-	GLfloat vertices[] = {
-		-10.0f, -10.0f, -10.0f,   0.0f, 0.0f, -1.0f,
-		 10.0f, -10.0f, -10.0f,   0.0f, 0.0f, -1.0f,
-		 10.0f,  10.0f, -10.0f,   0.0f, 0.0f, -1.0f,
-		 10.0f,  10.0f, -10.0f,   0.0f, 0.0f, -1.0f,
-		-10.0f,  10.0f, -10.0f,   0.0f, 0.0f, -1.0f,
-		-10.0f, -10.0f, -10.0f,   0.0f, 0.0f, -1.0f,
-
-		-10.0f, -10.0f,  10.0f,   0.0f, 0.0f,  1.0f,
-		 10.0f, -10.0f,  10.0f,   0.0f, 0.0f,  1.0f,
-		 10.0f,  10.0f,  10.0f,   0.0f, 0.0f,  1.0f,
-		 10.0f,  10.0f,  10.0f,   0.0f, 0.0f,  1.0f,
-		-10.0f,  10.0f,  10.0f,   0.0f, 0.0f,  1.0f,
-		-10.0f, -10.0f,  10.0f,   0.0f, 0.0f,  1.0f,
-
-		-10.0f,  10.0f,  10.0f,  -1.0f, 0.0f,  0.0f,
-		-10.0f,  10.0f, -10.0f,  -1.0f, 0.0f,  0.0f,
-		-10.0f, -10.0f, -10.0f,  -1.0f, 0.0f,  0.0f,
-		-10.0f, -10.0f, -10.0f,  -1.0f, 0.0f,  0.0f,
-		-10.0f, -10.0f,  10.0f,  -1.0f, 0.0f,  0.0f,
-		-10.0f,  10.0f,  10.0f,  -1.0f, 0.0f,  0.0f,
-
-		 10.0f,  10.0f,  10.0f,   1.0f, 0.0f,  0.0f,
-		 10.0f,  10.0f, -10.0f,   1.0f, 0.0f,  0.0f,
-		 10.0f, -10.0f, -10.0f,   1.0f, 0.0f,  0.0f,
-		 10.0f, -10.0f, -10.0f,   1.0f, 0.0f,  0.0f,
-		 10.0f, -10.0f,  10.0f,   1.0f, 0.0f,  0.0f,
-		 10.0f,  10.0f,  10.0f,   1.0f, 0.0f,  0.0f,
-
-		-10.0f, -10.0f, -10.0f,   0.0f, 1.0f,  0.0f,
-		 10.0f, -10.0f, -10.0f,   0.0f, 1.0f,  0.0f,
-		 10.0f, -10.0f,  10.0f,   0.0f, 1.0f,  0.0f,
-		 10.0f, -10.0f,  10.0f,   0.0f, 1.0f,  0.0f,
-		-10.0f, -10.0f,  10.0f,   0.0f, 1.0f,  0.0f,
-		-10.0f, -10.0f, -10.0f,   0.0f, 1.0f,  0.0f,
-
-		-10.0f,  10.0f, -10.0f,   0.0f, 1.0f,  0.0f,
-		 10.0f,  10.0f, -10.0f,   0.0f, 1.0f,  0.0f,
-		 10.0f,  10.0f,  10.0f,   0.0f, 1.0f,  0.0f,
-		 10.0f,  10.0f,  10.0f,   0.0f, 1.0f,  0.0f,
-		-10.0f,  10.0f,  10.0f,   0.0f, 1.0f,  0.0f,
-		-10.0f,  10.0f, -10.0f,   0.0f, 1.0f,  0.0f
-	};
-	ground = new Ground(m_shaderProgram, vertices, glm::vec3(0, -5, 0), false);
-	m_objectsList.push_back(ground);
-
 	// Cubo
-	GLfloat vertices2[] ={
-		-0.5f, -0.5f, -0.5f,   0.0f, 0.0f,  -1.0f,
-		 0.5f, -0.5f, -0.5f,   0.0f, 0.0f,  -1.0f,
-		 0.5f,  0.5f, -0.5f,   0.0f, 0.0f,  -1.0f,
-		 0.5f,  0.5f, -0.5f,   0.0f, 0.0f,  -1.0f,
-		-0.5f,  0.5f, -0.5f,   0.0f, 0.0f,  -1.0f,
-		-0.5f, -0.5f, -0.5f,   0.0f, 0.0f,  -1.0f,
-							   		 	    
-		-0.5f, -0.5f,  0.5f,   0.0f, 0.0f,   1.0f,
-		 0.5f, -0.5f,  0.5f,   0.0f, 0.0f,   1.0f,
-		 0.5f,  0.5f,  0.5f,   0.0f, 0.0f,   1.0f,
-		 0.5f,  0.5f,  0.5f,   0.0f, 0.0f,   1.0f,
-		-0.5f,  0.5f,  0.5f,   0.0f, 0.0f,   1.0f,
-		-0.5f, -0.5f,  0.5f,   0.0f, 0.0f,   1.0f,
-							   		 	    
-		-0.5f,  0.5f,  0.5f, - 1.0f, 0.0f,   0.0f,
-		-0.5f,  0.5f, -0.5f, - 1.0f, 0.0f,   0.0f,
-		-0.5f, -0.5f, -0.5f, - 1.0f, 0.0f,   0.0f,
-		-0.5f, -0.5f, -0.5f, - 1.0f, 0.0f,   0.0f,
-		-0.5f, -0.5f,  0.5f, - 1.0f, 0.0f,   0.0f,
-		-0.5f,  0.5f,  0.5f, - 1.0f, 0.0f,   0.0f,
-							   		 	    
-		 0.5f,  0.5f,  0.5f,   1.0f, 0.0f,   0.0f,
-		 0.5f,  0.5f, -0.5f,   1.0f, 0.0f,   0.0f,
-		 0.5f, -0.5f, -0.5f,   1.0f, 0.0f,   0.0f,
-		 0.5f, -0.5f, -0.5f,   1.0f, 0.0f,   0.0f,
-		 0.5f, -0.5f,  0.5f,   1.0f, 0.0f,   0.0f,
-		 0.5f,  0.5f,  0.5f,   1.0f, 0.0f,   0.0f,
-							   		 	    
-		-0.5f, -0.5f, -0.5f,   0.0f, 1.0f,   0.0f,
-		 0.5f, -0.5f, -0.5f,   0.0f, 1.0f,   0.0f,
-		 0.5f, -0.5f,  0.5f,   0.0f, 1.0f,   0.0f,
-		 0.5f, -0.5f,  0.5f,   0.0f, 1.0f,   0.0f,
-		-0.5f, -0.5f,  0.5f,   0.0f, 1.0f,   0.0f,
-		-0.5f, -0.5f, -0.5f,   0.0f, 1.0f,   0.0f,
-							   		 	    
-		-0.5f,  0.5f, -0.5f,   0.0f, 1.0f,   0.0f,
-		 0.5f,  0.5f, -0.5f,   0.0f, 1.0f,   0.0f,
-		 0.5f,  0.5f,  0.5f,   0.0f, 1.0f,   0.0f,
-		 0.5f,  0.5f,  0.5f,   0.0f, 1.0f,   0.0f,
-		-0.5f,  0.5f,  0.5f,   0.0f, 1.0f,   0.0f,
-		-0.5f,  0.5f, -0.5f,   0.0f, 1.0f,   0.0f
-	};
-	cube = new Cube(m_shaderProgram, vertices2, glm::vec3(0, 30, 0), 1.0f, true);
-	m_objectsList.push_back(cube);
+	for (int i = 0; i < 600; i++)
+	{
+		cube = new Cube(m_shaderProgram, rand()%10/5+1, glm::vec3(rand()%10, rand()%100+10, rand()%10), 1.0f, true);
+		m_objectsList.push_back(cube);
+	}
 
-	cube = new Cube(m_shaderProgram, vertices2, glm::vec3(0, -3, 0), 0.0f, false);
-	m_objectsList.push_back(cube);
+	// Ground
+	ground = new Ground(m_shaderProgram, 30.0f, glm::vec3(0, 0, 0), true);
+	m_objectsList.push_back(ground);
 
 	// Directional light
 	glm::vec3 ambient(0.8f, 0.8f, 0.8f);
@@ -136,7 +50,7 @@ void GravityScenario::updateCamera(Camera* camera)
 	projection = glm::perspective(camera->Zoom, (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.1f, 1000.0f);
 }
 
-void GravityScenario::updatePhysics(int deltaTime)
+void GravityScenario::updatePhysics(float deltaTime)
 {
 	m_physicsHandler->stepSimulation(deltaTime);
 
@@ -149,7 +63,7 @@ void GravityScenario::updatePhysics(int deltaTime)
 void GravityScenario::renderScenario(Camera* camera)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glClearColor(0.34, 0.78, 0.756, 1.0);
+	glClearColor(0.34, 0.78, 0.76, 1.0);
 
 	for each (GameObject* gameObject in m_objectsList)
 	{

@@ -13,7 +13,7 @@
 class Cube : public GameObject
 {
 public:
-	Cube(ShaderProgram* shaderProgram, GLfloat* vertices, glm::vec3 position, float mass, bool enablePhysics);
+	Cube(ShaderProgram* shaderProgram, GLfloat size, glm::vec3 position, float mass, bool enablePhysics);
 	~Cube();
 
 	const std::string name { "Cube" };
@@ -21,22 +21,22 @@ public:
 	void setup();
 	void updatePhysics();
 	void update(glm::vec3 viewPosition, glm::mat4 view, glm::mat4 projection, LightCaster* lightCaster);
-	//void update(Camera* camera);
 	void clean();
 
 	btRigidBody* getRigidBody();
 
 private:
 	ShaderProgram* m_shaderProgram;
-	GLfloat* m_vertices;
+	GLfloat m_side;
 	glm::vec3 m_position;
 	glm::vec3 m_rotation;
 	GLuint m_VBO, m_VAO;
 
+	btTransform transform;
 	float m_mass;
 	btVector3 m_inertia;
-	btCollisionShape* shape;
-	btDefaultMotionState* motionState;
-	btRigidBody* rigidBody;
-	btScalar yaw, pitch, roll;
+	btCollisionShape* m_shape;
+	btDefaultMotionState* m_motionState;
+	btRigidBody* m_rigidBody;
+	btScalar m_yaw, m_pitch, m_roll;
 };

@@ -8,7 +8,7 @@ PhysicsHandler::PhysicsHandler()
 	solver = new btSequentialImpulseConstraintSolver;
 	dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
 
-	dynamicsWorld->setGravity(btVector3(0, -10, 0));
+	dynamicsWorld->setGravity(btVector3(0, -9.8, 0));
 }
 
 PhysicsHandler::~PhysicsHandler()
@@ -31,10 +31,9 @@ void PhysicsHandler::setupRigidBodies(std::vector<GameObject*> gameObjectsList)
 	}
 }
 
-void PhysicsHandler::stepSimulation(int deltaTime)
+void PhysicsHandler::stepSimulation(float deltaTime)
 {
-	//dynamicsWorld->stepSimulation(1 / 60.0f, 10);
-	dynamicsWorld->stepSimulation((float)deltaTime/1000.0f, 10);
+	dynamicsWorld->stepSimulation(deltaTime/1000.0f, 1);
 }
 
 void PhysicsHandler::cleanRigidBodies(std::vector<GameObject*> gameObjectsList)

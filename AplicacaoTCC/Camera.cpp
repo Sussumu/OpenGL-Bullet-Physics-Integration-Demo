@@ -24,19 +24,19 @@ Camera::Camera(GLfloat posX, GLfloat posY, GLfloat posZ, GLfloat upX, GLfloat up
 
 glm::mat4 Camera::GetViewMatrix()
 {
-	static int delay = 0;
-	if (delay >= 30)
-	{
-		gotoxy(0, 8);
-		showMessage("Posição     x " + std::to_string(this->Position.x) + "     y " + std::to_string(this->Position.y) + "     z " + std::to_string(this->Position.z));
-		gotoxy(0, 9);
-		showMessage("Posição     x " + std::to_string(this->Position.x + this->Front.x) + "     y " + std::to_string(this->Position.y + this->Front.y) + "     z " + std::to_string(this->Position.z + this->Front.z));
-		delay = 0;
-	}
-	else
-	{
-		delay++;
-	}
+	//static int delay = 0;
+	//if (delay >= 30)
+	//{
+	//	gotoxy(0, 8);
+	//	showMessage("Posição     x " + std::to_string(this->Position.x) + "     y " + std::to_string(this->Position.y) + "     z " + std::to_string(this->Position.z));
+	//	gotoxy(0, 9);
+	//	showMessage("Posição     x " + std::to_string(this->Position.x + this->Front.x) + "     y " + std::to_string(this->Position.y + this->Front.y) + "     z " + std::to_string(this->Position.z + this->Front.z));
+	//	delay = 0;
+	//}
+	//else
+	//{
+	//	delay++;
+	//}
 	return glm::lookAt(this->Position, this->Position + this->Front, this->Up);
 }
 

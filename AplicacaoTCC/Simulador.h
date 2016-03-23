@@ -29,7 +29,7 @@ private:
 	} m_simulationState;
 
 	// DeltaTime
-	int m_actualTicks = 0, m_lastTicks = 0, m_deltaTime = 0;
+	float m_actualTicks = 0, m_lastTicks = 0, m_deltaTime = 0;
 	float m_maxFps { 60.0f };
 
 	// Input
