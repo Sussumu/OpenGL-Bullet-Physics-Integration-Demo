@@ -22,6 +22,7 @@ Camera::Camera(GLfloat posX, GLfloat posY, GLfloat posZ, GLfloat upX, GLfloat up
 	this->updateCameraVectors();
 }
 
+// Retorna a matriz LookAt
 glm::mat4 Camera::GetViewMatrix()
 {
 	//static int delay = 0;
@@ -40,35 +41,29 @@ glm::mat4 Camera::GetViewMatrix()
 	return glm::lookAt(this->Position, this->Position + this->Front, this->Up);
 }
 
+// Executa as chamadas do teclado
 void Camera::ProcessKeyboard(Camera_Movement direction, GLfloat deltaTime)
 {
 	GLfloat velocity = this->MovementSpeed * deltaTime;
 	if (direction == FORWARD)
 	{
 		this->Position += this->Front * velocity;
-		//gotoxy(0, 6);
-		//showMessage(std::to_string(direction) + " " + std::to_string(float(this->Front.x) * velocity) + "   " + std::to_string(float(this->Front.y) * velocity) + "   " + std::to_string(float(this->Front.z) * velocity));
 	}
 	if (direction == BACKWARD)
 	{
 		this->Position -= this->Front * velocity;
-		//gotoxy(0, 6);
-		//showMessage(std::to_string(direction) + " " + std::to_string(float(this->Front.x) * velocity) + "   " + std::to_string(float(this->Front.y) * velocity) + "   " + std::to_string(float(this->Front.z) * velocity));
 	}
 	if (direction == LEFT)
 	{
 		this->Position -= this->Right * velocity;
-		//gotoxy(0, 6);
-		//showMessage(std::to_string(direction) + " " + std::to_string(float(this->Right.x) * velocity) + "   " + std::to_string(float(this->Right.y) * velocity) + "   " + std::to_string(float(this->Right.z) * velocity));
 	}
 	if (direction == RIGHT) 
 	{
 		this->Position += this->Right * velocity;
-		//gotoxy(0, 6);
-		//showMessage(std::to_string(direction) + " " + std::to_string(float(this->Right.x) * velocity) + "   " + std::to_string(float(this->Right.y) * velocity) + "   " + std::to_string(float(this->Right.z) * velocity));
 	}
 }
 
+// Executa as chamadas do mouse (motion)
 void Camera::ProcessMouseMovement(GLfloat xoffset, GLfloat yoffset, GLboolean constrainPitch)
 {
 	xoffset *= this->MouseSensitivity;
@@ -76,13 +71,7 @@ void Camera::ProcessMouseMovement(GLfloat xoffset, GLfloat yoffset, GLboolean co
 
 	this->Yaw += xoffset;
 	this->Pitch += yoffset;
-
-	//gotoxy(0, 10);
-	//showMessage("Yaw   " + std::to_string(this->Yaw));
-	//gotoxy(0, 11);
-	//showMessage("Pitch " + std::to_string(this->Pitch));
-
-
+	
 	if (constrainPitch)
 	{
 		if (this->Pitch > 89.0f)
@@ -94,6 +83,7 @@ void Camera::ProcessMouseMovement(GLfloat xoffset, GLfloat yoffset, GLboolean co
 	this->updateCameraVectors();
 }
 
+// Executa as chamadas do scroll do mouse
 void Camera::ProcessMouseScroll(GLfloat yoffset)
 {
 	yoffset /= 4;

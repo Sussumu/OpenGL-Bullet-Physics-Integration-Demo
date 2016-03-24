@@ -2,23 +2,20 @@
 
 Simulador::Simulador(int option)
 {
-	initializeSystems();
+	m_actualTicks = m_lastTicks = m_deltaTime = 0;
+	m_maxFps = 60.0f;
+
+	m_window = new WindowComponent();
+	m_scenario = new Scenario();
 	m_camera = new Camera(glm::vec3(0.0f, 0.0f, 25.0f));
+	m_window->initializeWindow();
+
 	setupScenario(option);
 }
 
 Simulador::~Simulador()
 {
 	endProgram();
-}
-
-// Inicializa janela
-bool Simulador::initializeSystems()
-{
-	// Window + SDL init
-	m_window->initializeWindow();
-
-	return true;
 }
 
 // Seleciona e carrega o scenario, chamado pelo construtor
@@ -34,9 +31,8 @@ void Simulador::setupScenario(int option)
 }
 
 // Loop principal do simulador
-bool Simulador::gameLoop()
+void Simulador::gameLoop()
 {
-	m_deltaTime = 1;
 	while (m_simulationState != SimulationState::EXIT)
 	{
 		m_lastTicks = SDL_GetTicks();
@@ -53,15 +49,10 @@ bool Simulador::gameLoop()
 		m_actualTicks = SDL_GetTicks();
 		m_deltaTime = m_actualTicks - m_lastTicks;
 
+		// Tempo passado desde o último frame
 		//gotoxy(0, 8);
 		//showMessage("Delta Time: " + std::to_string(m_deltaTime) + " ms");
-
-		// Frame limiter
-		//if (1000.0f / m_maxFps > m_deltaTime)
-		//	SDL_Delay(1000.0f / m_maxFps - m_deltaTime);
 	}
-
-	return true;
 }
 
 // Atualiza a física em cada gameobject

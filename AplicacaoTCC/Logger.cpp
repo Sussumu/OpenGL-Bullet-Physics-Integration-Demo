@@ -1,5 +1,6 @@
 #include "Logger.h"
 
+// Exibe uma mensagem de texto no console
 void showMessage(std::string message)
 {
 	std::cout << message;
@@ -19,6 +20,7 @@ void fatalError(std::string message)
 	exit(1);
 }
 
+// Move o cursor do console para uma posição x,y
 void gotoxy(int x, int y)
 {
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);

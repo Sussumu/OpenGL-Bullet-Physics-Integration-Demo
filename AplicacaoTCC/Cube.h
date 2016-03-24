@@ -1,9 +1,8 @@
 #pragma once
 
-#include "Camera.h"
-#include "Simulador.h"
 #include "GameObject.h"
 #include "ShaderProgram.h"
+
 #include <string>
 #include <GL/glew.h>
 #include <glm/glm.hpp>
@@ -12,7 +11,9 @@
 
 class Cube : public GameObject
 {
+
 public:
+
 	Cube(ShaderProgram* shaderProgram, GLfloat size, glm::vec3 position, float mass, bool enablePhysics);
 	~Cube();
 
@@ -26,13 +27,17 @@ public:
 	btRigidBody* getRigidBody();
 
 private:
+
 	ShaderProgram* m_shaderProgram;
 	GLfloat m_side;
 	glm::vec3 m_position;
 	glm::vec3 m_rotation;
 	GLuint m_VBO, m_VAO;
 
-	btTransform transform;
+	GLuint m_objectColorLoc, m_lightAmbient, m_lightDiffuse, m_lightSpecular, m_lightDirection, m_viewPosLoc;
+	GLuint m_modelLoc, m_viewLoc, m_projLoc;
+
+	btTransform m_transform;
 	float m_mass;
 	btVector3 m_inertia;
 	btCollisionShape* m_shape;

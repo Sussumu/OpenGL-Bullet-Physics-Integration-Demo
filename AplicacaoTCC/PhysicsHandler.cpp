@@ -20,6 +20,7 @@ PhysicsHandler::~PhysicsHandler()
 	delete broadphase;
 }
 
+// Adiciona os rigidbodies de cada objeto no mundo
 void PhysicsHandler::setupRigidBodies(std::vector<GameObject*> gameObjectsList)
 {
 	for each (GameObject* gameObject in gameObjectsList)
@@ -31,11 +32,13 @@ void PhysicsHandler::setupRigidBodies(std::vector<GameObject*> gameObjectsList)
 	}
 }
 
+// Realiza a etapa de cálculo de física baseado no tempo passado desde o último frame
 void PhysicsHandler::stepSimulation(float deltaTime)
 {
 	dynamicsWorld->stepSimulation(deltaTime/1000.0f, 1);
 }
 
+// Limpa os dados 
 void PhysicsHandler::cleanRigidBodies(std::vector<GameObject*> gameObjectsList)
 {
 	for each (GameObject* gameObject in gameObjectsList)

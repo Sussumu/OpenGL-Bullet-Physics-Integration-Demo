@@ -6,7 +6,9 @@
 
 class PhysicsHandler
 {
+
 public:
+
 	PhysicsHandler();
 	~PhysicsHandler();
 
@@ -15,6 +17,7 @@ public:
 	void cleanRigidBodies(std::vector<GameObject*> gameObjectsList);
 
 private:
+
 	btBroadphaseInterface* broadphase;
 	btDefaultCollisionConfiguration* collisionConfiguration;
 	btCollisionDispatcher* dispatcher;

@@ -2,8 +2,12 @@
 
 WindowComponent::WindowComponent()
 {
+	m_window = nullptr;
+	m_vsync = true;
+	wantToCalculateFps = true;
+	maxFps = 60.0f;
+	m_fps = m_frameTime = 0;
 }
-
 
 WindowComponent::~WindowComponent()
 {
@@ -14,7 +18,7 @@ SDL_Window* WindowComponent::getWindow()
 	return m_window;
 }
 
-bool WindowComponent::initializeWindow()
+void WindowComponent::initializeWindow()
 {
 	// SDL
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
@@ -22,6 +26,7 @@ bool WindowComponent::initializeWindow()
 		fatalError("O SDL não pode ser inicializado!");
 	}
 
+	// Janela
 	m_window = SDL_CreateWindow("Aplicação TCC", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_OPENGL);
 	if (m_window == nullptr)
 	{
@@ -49,24 +54,24 @@ bool WindowComponent::initializeWindow()
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-
-	// Cursor lock
-	SDL_SetRelativeMouseMode(SDL_TRUE);
-
+	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 32);
+	SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);
+	SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 4);
 	glEnable(GL_DEPTH_TEST);
+
+	// Trava o cursor na janela
+	SDL_SetRelativeMouseMode(SDL_TRUE);
 
 	// Vsync
 	if (m_vsync)
 	{
 		if (SDL_GL_SetSwapInterval(1) < 0)
 		{
-			printf("Falha ao iniciar em modo vsync.\n%s\n", SDL_GetError());
+			fatalError("Falha ao iniciar em modo vsync.");
 		}
 	}
 
 	printf("OPENGL VERSION %s\n", glGetString(GL_VERSION));
-
-	return true;
 }
 
 void WindowComponent::calculateFPS()
@@ -111,7 +116,6 @@ void WindowComponent::calculateFPS()
 	frameCounter++;
 	if (frameCounter == 60)
 	{
-		//printf("%.0f\n", m_fps);
 		gotoxy(0, 2);
 		showMessage(std::to_string((int)m_fps) + " fps");
 		frameCounter = 0;

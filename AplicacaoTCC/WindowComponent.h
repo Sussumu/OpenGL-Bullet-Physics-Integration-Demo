@@ -14,19 +14,19 @@ public:
 	WindowComponent();
 	~WindowComponent();
 	
-	bool wantToCalculateFps{ true };
-	float m_maxFps{ 60.0f };
+	bool wantToCalculateFps;
+	float maxFps;
 
 	SDL_Window* getWindow();
-	bool initializeWindow();
+	void initializeWindow();
 
 	void calculateFPS();
 
 private:
 
-	SDL_Window* m_window{ nullptr };
-	bool m_vsync{ true };
+	SDL_Window* m_window;
+	bool m_vsync;
 
-	float m_fps{ 0 };
-	float m_frameTime{ 0 };
+	float m_fps;
+	float m_frameTime;
 };

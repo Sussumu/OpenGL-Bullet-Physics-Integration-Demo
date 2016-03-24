@@ -10,6 +10,8 @@
 #include "PhysicsHandler.h"
 #include "ShaderProgram.h"
 #include "WindowComponent.h"
+
+#include <ctime>
 #include <glm/glm.hpp>
 #include <GL/glew.h>
 #include <vector>
@@ -17,22 +19,23 @@
 
 class GravityScenario : public Scenario
 {
+
 public:
+
 	GravityScenario();
 	~GravityScenario();
 	
 private:
 
-	GameObject* cube { nullptr };
-	GameObject* diffuseSource { nullptr };
-	GameObject* ground { nullptr };
-	LightCaster* directionalLight{ nullptr };
-	ShaderProgram* m_shaderProgram = new ShaderProgram();
-	ShaderProgram* m_lightShaderProgram = new ShaderProgram();
+	GameObject* cube;
+	GameObject* diffuseSource;
+	GameObject* ground;
+	LightCaster* directionalLight;
+	ShaderProgram* m_shaderProgram;
 
 	glm::mat4 view, projection;
 
-	PhysicsHandler* m_physicsHandler = new PhysicsHandler();
+	PhysicsHandler* m_physicsHandler;
 
 	std::vector<GameObject*> m_objectsList;
 
