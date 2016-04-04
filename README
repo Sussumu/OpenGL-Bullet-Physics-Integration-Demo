@@ -21,5 +21,3 @@ Futuras modificações:
 • Cada game object precisa ter conhecimento da posição da câmera e das matrizes view e projection, então, IMHO, o objeto Camera poderia ser transformado em singleton ou ter funções estáticas.
 • Reavaliar as dependências entre as classes.
 • Isolar input do usuário da classe Simulador.
-
-Existem alguns motivos para não se utilizar singleton, mas também existem motivos para nunca se utilizar OOP ou membros estáticos, então sem modificações por hora.
