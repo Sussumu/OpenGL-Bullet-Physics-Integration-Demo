@@ -35,7 +35,7 @@ void PhysicsHandler::setupRigidBodies(std::vector<GameObject*> gameObjectsList)
 // Realiza a etapa de cálculo de física baseado no tempo passado desde o último frame
 void PhysicsHandler::stepSimulation(float deltaTime)
 {
-	dynamicsWorld->stepSimulation(deltaTime/1000.0f, 1);
+	dynamicsWorld->stepSimulation(deltaTime/1000.0f);
 }
 
 // Limpa os dados 

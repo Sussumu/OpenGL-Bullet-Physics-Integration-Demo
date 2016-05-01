@@ -98,6 +98,17 @@ void Ground::setup()
 	glEnableVertexAttribArray(1);
 
 	glBindVertexArray(0); // Unbind VAO
+
+	m_objectColorLoc = glGetUniformLocation(m_shaderProgram->programID, "objectColor");
+	m_lightAmbient = glGetUniformLocation(m_shaderProgram->programID, "light.ambient");
+	m_lightDiffuse = glGetUniformLocation(m_shaderProgram->programID, "light.diffuse");
+	m_lightSpecular = glGetUniformLocation(m_shaderProgram->programID, "light.specular");
+	m_lightDirection = glGetUniformLocation(m_shaderProgram->programID, "light.direction");
+	m_viewPosLoc = glGetUniformLocation(m_shaderProgram->programID, "viewPos");
+
+	m_modelLoc = glGetUniformLocation(m_shaderProgram->programID, "model");
+	m_viewLoc = glGetUniformLocation(m_shaderProgram->programID, "view");
+	m_projLoc = glGetUniformLocation(m_shaderProgram->programID, "projection");
 }
 
 void Ground::updatePhysics()
@@ -109,23 +120,12 @@ void Ground::update(glm::vec3 viewPosition, glm::mat4 view, glm::mat4 projection
 {
 	m_shaderProgram->use();
 	
-	m_objectColorLoc = glGetUniformLocation(m_shaderProgram->programID, "objectColor");
-	m_lightAmbient = glGetUniformLocation(m_shaderProgram->programID, "light.ambient");
-	m_lightDiffuse = glGetUniformLocation(m_shaderProgram->programID, "light.diffuse");
-	m_lightSpecular = glGetUniformLocation(m_shaderProgram->programID, "light.specular");
-	m_lightDirection = glGetUniformLocation(m_shaderProgram->programID, "light.direction");
-	m_viewPosLoc = glGetUniformLocation(m_shaderProgram->programID, "viewPos");
-
 	glUniform3f(m_objectColorLoc, 0.84f, 1.0f, 1.0f);
 	glUniform3f(m_lightAmbient, lightCaster->getAmbient().x, lightCaster->getAmbient().y, lightCaster->getAmbient().z);
 	glUniform3f(m_lightDiffuse, lightCaster->getDiffuse().x, lightCaster->getDiffuse().y, lightCaster->getDiffuse().z);
 	glUniform3f(m_lightSpecular, lightCaster->getSpecular().x, lightCaster->getSpecular().y, lightCaster->getSpecular().z);
 	glUniform3f(m_lightDirection, lightCaster->getDirection().x, lightCaster->getDirection().y, lightCaster->getDirection().z);
 	glUniform3f(m_viewPosLoc, viewPosition.x, viewPosition.y, viewPosition.z);
-
-	m_modelLoc = glGetUniformLocation(m_shaderProgram->programID, "model");
-	m_viewLoc = glGetUniformLocation(m_shaderProgram->programID, "view");
-	m_projLoc = glGetUniformLocation(m_shaderProgram->programID, "projection");
 
 	glm::mat4 model;
 	model = glm::translate(model, m_position);

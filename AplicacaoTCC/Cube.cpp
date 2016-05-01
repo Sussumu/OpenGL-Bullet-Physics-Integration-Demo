@@ -88,6 +88,17 @@ void Cube::setup()
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
 	glEnableVertexAttribArray(1);
 	glBindVertexArray(0);
+
+	m_objectColorLoc = glGetUniformLocation(m_shaderProgram->programID, "objectColor");
+	m_lightAmbient = glGetUniformLocation(m_shaderProgram->programID, "light.ambient");
+	m_lightDiffuse = glGetUniformLocation(m_shaderProgram->programID, "light.diffuse");
+	m_lightSpecular = glGetUniformLocation(m_shaderProgram->programID, "light.specular");
+	m_lightDirection = glGetUniformLocation(m_shaderProgram->programID, "light.direction");
+	m_viewPosLoc = glGetUniformLocation(m_shaderProgram->programID, "viewPos");
+
+	m_modelLoc = glGetUniformLocation(m_shaderProgram->programID, "model");
+	m_viewLoc = glGetUniformLocation(m_shaderProgram->programID, "view");
+	m_projLoc = glGetUniformLocation(m_shaderProgram->programID, "projection");
 }
 
 // Atualiza posição e rotação do objeto
@@ -107,27 +118,16 @@ void Cube::update(glm::vec3 viewPosition, glm::mat4 view, glm::mat4 projection, 
 {
 	m_shaderProgram->use();
 
-	m_objectColorLoc = glGetUniformLocation(m_shaderProgram->programID, "objectColor");
-	m_lightAmbient = glGetUniformLocation(m_shaderProgram->programID, "light.ambient");
-	m_lightDiffuse = glGetUniformLocation(m_shaderProgram->programID, "light.diffuse");
-	m_lightSpecular = glGetUniformLocation(m_shaderProgram->programID, "light.specular");
-	m_lightDirection = glGetUniformLocation(m_shaderProgram->programID, "light.direction");
-	m_viewPosLoc = glGetUniformLocation(m_shaderProgram->programID, "viewPos");
-
-	if (m_rigidBody->getActivationState() == 1)
-		glUniform3f(m_objectColorLoc, 0.69f, 0.17f, 0.17f);
-	else
-		glUniform3f(m_objectColorLoc, 0.5f, 0.5f, 0.5f);
-	
 	glUniform3f(m_lightAmbient, lightCaster->getAmbient().x, lightCaster->getAmbient().y, lightCaster->getAmbient().z);
 	glUniform3f(m_lightDiffuse, lightCaster->getDiffuse().x, lightCaster->getDiffuse().y, lightCaster->getDiffuse().z);
 	glUniform3f(m_lightSpecular, lightCaster->getSpecular().x, lightCaster->getSpecular().y, lightCaster->getSpecular().z);
 	glUniform3f(m_lightDirection, lightCaster->getDirection().x, lightCaster->getDirection().y, lightCaster->getDirection().z);
 	glUniform3f(m_viewPosLoc, viewPosition.x, viewPosition.y, viewPosition.z);
 
-	m_modelLoc = glGetUniformLocation(m_shaderProgram->programID, "model");
-	m_viewLoc = glGetUniformLocation(m_shaderProgram->programID, "view");
-	m_projLoc = glGetUniformLocation(m_shaderProgram->programID, "projection");
+	if (m_rigidBody->getActivationState() == 1)
+		glUniform3f(m_objectColorLoc, 0.69f, 0.17f, 0.17f);
+	else
+		glUniform3f(m_objectColorLoc, 0.5f, 0.5f, 0.5f);
 	
 	glm::mat4 model;
 	model = glm::translate(model, m_position);
