@@ -68,18 +68,34 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>C:\Program Files %28x86%29\Windows Kits\10\Include\10.0.10150.0\ucrt;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files %28x86%29\Windows Kits\10\Lib\10.0.10150.0\ucrt\x86;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>C:\Program Files %28x86%29\Windows Kits\10\Include\10.0.10150.0\ucrt;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files %28x86%29\Windows Kits\10\Lib\10.0.10150.0\ucrt\x86;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>C:\Program Files %28x86%29\Windows Kits\10\Include\10.0.10150.0\ucrt;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files %28x86%29\Windows Kits\10\Lib\10.0.10150.0\ucrt\x86;C:\Program Files %28x86%29\Windows Kits\10\Lib\10.0.10150.0\ucrt\x64;C:\Users\gabri\Source\Repos\OpenGL-Bullet-Physics-Integration-Demo\AplicacaoTCC\Lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>C:\Program Files %28x86%29\Windows Kits\10\Include\10.0.10150.0\ucrt;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files %28x86%29\Windows Kits\10\Lib\10.0.10150.0\ucrt\x86;C:\Program Files %28x86%29\Windows Kits\10\Lib\10.0.10150.0\ucrt\x64;C:\Users\gabri\Source\Repos\OpenGL-Bullet-Physics-Integration-Demo\AplicacaoTCC\Lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\gabriel.kato\Documents\AplicacaoTCC\AplicacaoTCC\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\gabri\Source\Repos\OpenGL-Bullet-Physics-Integration-Demo\AplicacaoTCC\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;glew32s.lib;SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\gabriel.kato\Documents\AplicacaoTCC\AplicacaoTCC\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32.lib;opengl32.lib;SDL2.lib;SDL2main.lib;BulletCollision.lib;BulletDynamics.lib;LinearMath.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\gabri\Source\Repos\OpenGL-Bullet-Physics-Integration-Demo\AplicacaoTCC\Lib</AdditionalLibraryDirectories>
       <SubSystem>Windows</SubSystem>
     </Link>
   </ItemDefinitionGroup>
@@ -88,13 +104,14 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)\AplicacaoTCC\Include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\gabri\Source\Repos\OpenGL-Bullet-Physics-Integration-Demo\AplicacaoTCC\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <BrowseInformation>true</BrowseInformation>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)\AplicacaoTCC\Lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;glew32.lib;SDL2.lib;SDL2Main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\gabri\Source\Repos\OpenGL-Bullet-Physics-Integration-Demo\AplicacaoTCC\Lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32.lib;opengl32.lib;SDL2.lib;SDL2main.lib;BulletCollision.lib;BulletDynamics.lib;LinearMath.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
     <Bscmake>
@@ -108,11 +125,13 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>C:\Users\gabri\Source\Repos\OpenGL-Bullet-Physics-Integration-Demo\AplicacaoTCC\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;opengl32.lib;glew32s.lib;SOIL.lib;BulletCollision.lib;BulletDynamics.lib;LinearMath.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -122,14 +141,14 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)\AplicacaoTCC\Include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\gabri\Source\Repos\OpenGL-Bullet-Physics-Integration-Demo\AplicacaoTCC\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(SolutionDir)\AplicacaoTCC\Lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;glew32.lib;SDL2.lib;SDL2Main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;opengl32.lib;glew32s.lib;SOIL.lib;BulletCollision.lib;BulletDynamics.lib;LinearMath.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
@@ -177,17 +196,6 @@
     <None Include="..\x64\Debug\Shaders\colorShading.vert" />
     <None Include="..\x64\Debug\Shaders\lightShading.frag" />
     <None Include="..\x64\Debug\Shaders\lightShading.vert" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Bibliotecas\bullet3-2.83.7\BUILD\src\BulletCollision\BulletCollision.vcxproj">
-      <Project>{fb6f4046-2d08-3287-8ef6-aeaa65503ee3}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\Bibliotecas\bullet3-2.83.7\BUILD\src\BulletDynamics\BulletDynamics.vcxproj">
-      <Project>{ea4d3b9f-91b0-3139-a972-6f86585c8fcd}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\Bibliotecas\bullet3-2.83.7\BUILD\src\LinearMath\LinearMath.vcxproj">
-      <Project>{dfa638e4-c70c-373c-834d-e5043f7764eb}</Project>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="AplicacaoTCC.rc" />

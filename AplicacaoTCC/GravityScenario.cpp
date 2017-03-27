@@ -29,7 +29,7 @@ void GravityScenario::setupScenario()
 {
 	// Cubo
 	srand(time(NULL));
-	for (int i = 0; i < 300; i++)
+	for (int i = 0; i < 100; i++)
 	{
 		cube = new Cube(m_shaderProgram, rand()%10/5+1, glm::vec3(rand()%10, rand()%100+10, rand()%10), 1.0f, true);
 		m_objectsList.push_back(cube);
